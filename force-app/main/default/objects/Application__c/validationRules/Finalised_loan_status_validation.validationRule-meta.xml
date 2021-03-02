@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finalised_loan_status_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (NOT(ISNEW()), OR (ISPICKVAL(PRIORVALUE(Status__c),&quot;Denied&quot;), ISPICKVAL(PRIORVALUE(Status__c),&quot;Canceled&quot;), ISPICKVAL(PRIORVALUE(Status__c),&quot;Approved&quot;)))</errorConditionFormula>
+    <errorMessage>Finalized loan can not be changed</errorMessage>
+</ValidationRule>

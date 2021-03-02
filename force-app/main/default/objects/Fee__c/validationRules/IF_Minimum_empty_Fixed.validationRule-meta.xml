@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IF_Minimum_empty_Fixed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Fixed&apos;,
+NOT(ISBLANK(Amount__c)),
+ISBLANK(Minimum__c)
+)</errorConditionFormula>
+    <errorDisplayField>Minimum__c</errorDisplayField>
+    <errorMessage>Please enter minimum value</errorMessage>
+</ValidationRule>

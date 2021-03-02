@@ -1,0 +1,84 @@
+<template>
+    <div class="slds-card slds-card_boundary" style="z-index: 1;">
+            <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure"> 
+                         <lightning-icon icon-name="action:update_status" size="x-small" alternative-text="Connected">
+                        </lightning-icon>     
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">  
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                            <span>Timeline ({eventCount}) </span>
+                            </a>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-media__body">
+                <div if:true={error}>
+                    <p class="slds-var-p-around_small slds-var-p-horizontal_small">Error while fetching data</p>
+                </div>
+                <ul if:false={error} class="slds-timeline slds-var-p-around_small slds-p-bottom_none">
+                    <template for:each={eventDetail} for:item="detail">
+                        <li key={detail.Id}>
+                        <div class={detail.timeClass}> 
+                        <div class="slds-media">
+                            <div id={detail.title} class="slds-media__figure">
+
+                                <button value={detail.Name} class="slds-button slds-button_icon"
+                                     onclick={expandActivity}
+                                     aria-expanded="true">
+                                    <lightning-icon icon-name="utility:switch" 
+                                                    size="x-small"
+                                                    class="slds-button__icon slds-timeline__details-action-icon">
+                                                    </lightning-icon>
+                                </button>
+                                
+                                <div class="slds-icon_container">
+                                    <lightning-icon size="xx-small" icon-name={detail.EventIcon}></lightning-icon>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-media__body">
+                                <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                                        <h3 class="slds-truncate">
+                                         <strong> <a href={detail.tLink}> {detail.Title__c} </a> </strong>
+                                        </h3>
+                                    </div>
+                                    <div class="slds-timeline__actions slds-timeline__actions_inline">
+                                        <p class="slds-timeline__date">
+                                            <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" value={detail.Event_Date__c}></lightning-formatted-date-time>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="slds-var-m-horizontal_xx-small"><lightning-formatted-rich-text value={detail.Subtitle__c}> </lightning-formatted-rich-text> </p>
+
+                                <article class="slds-box slds-timeline__item_details slds-theme_shade slds-var-m-top_x-small slds-var-m-horizontal_xx-small">
+                                    <div if:true={detail.showForm}>
+                                        <c-timeline-expansion object-id={detail.Related_Id__c} object-name={detail.Related_Object_Name__c}>
+                                        </c-timeline-expansion>
+                                    </div> 
+                                    <div>
+                                       <span class="slds-text-title">Description</span>
+                                        <p class="slds-var-p-top_x-small">{detail.Description__c}</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </template>
+            </ul>    
+            </div>
+            <div if:false={error}>
+            <footer class="slds-card__footer" style="margin-top: 0;">
+                <a class="slds-card__footer-action" onclick={navigateToTabPage}> View All </a>
+            </footer>
+        </div>
+        <div if:true={loading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </div>
+</template>

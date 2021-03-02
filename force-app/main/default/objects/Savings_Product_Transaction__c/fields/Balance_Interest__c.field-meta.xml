@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Balance_Interest__c</fullName>
+    <externalId>false</externalId>
+    <label>Balance Interest</label>
+    <summarizedField>Savings_Product_Transaction_Line__c.Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>Savings_Product_Transaction_Line__c.Type__c</field>
+        <operation>equals</operation>
+        <value>Interest</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Savings_Product_Transaction_Line__c.Savings_Product_Transaction__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

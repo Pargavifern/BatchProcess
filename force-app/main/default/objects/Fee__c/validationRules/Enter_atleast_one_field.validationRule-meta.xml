@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enter_atleast_one_field</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name ==&apos;Variable&apos;,
+ISBLANK( Formula__c),
+ISBLANK( Default_Amount__c) ,
+ISBLANK(Percentage__c)
+)</errorConditionFormula>
+    <errorMessage>Please enter one value of default amount or percentage or formula</errorMessage>
+</ValidationRule>

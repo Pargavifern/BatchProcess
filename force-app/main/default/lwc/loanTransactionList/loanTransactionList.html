@@ -1,0 +1,89 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom17" alternative-text="Transactions" size="small">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b>Transactions ({tranCount})</b> </h2>
+                </div>
+                <div class="slds-no-flex"> 
+                    <lightning-combobox
+                    name="progress" variant="label-hidden"
+                    value={filterName}
+                    placeholder="Select Progress"
+                    options={filterOptions}
+                    onchange={handleChange} ></lightning-combobox>
+                </div>
+            </header>
+        </div>
+        <div if:true={error}>
+            <p class="slds-var-p-around_small slds-var-p-horizontal_small">Error while fetching data</p>
+        </div>
+        <div if:false={error}>
+            <div if:true={dataPresent}>
+                <div class="slds-media__body">
+                    <lightning-tree-grid hide-checkbox-column 
+                    columns={gridColumns}
+                    data={gridData}
+                    onrowaction={handleRowAction}
+                    key-field="id"></lightning-tree-grid>
+                </div>
+                   
+                </div>
+            </div>
+        </div>
+    <div if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+
+
+    <template if:true={bShowModal}>
+        <section role="dialog" tabindex="-1"
+                 aria-labelledby="modal-heading-01"
+                 aria-modal="true"
+                 aria-describedby="modal-content-id-1"
+                class="slds-modal slds-fade-in-open">
+           <div class="slds-modal__container">
+              <!-- modal header start -->
+              <header class="slds-modal__header">
+                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                 </button>
+                 <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Transaction Detail</h2>
+              </header>
+              <!-- modal body start -->
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-record-view-form record-id={transactionId} object-api-name="Loan_Transaction__c">
+                    <div class="slds-grid slds-wrap slds-gutters slds-var-p-around_large">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Payment_Method__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <span class="slds-form-element__label">Owner</span>
+                            <lightning-output-field variant="label-hidden"  field-name="CreatedById">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning-output-field field-name="Note__c">
+                            </lightning-output-field>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+              </div>
+              <!-- modal footer start-->
+              <footer class="slds-modal__footer">
+                   <lightning-button variant="brand"
+                   label="Close"
+                   title="Close"
+                   onclick={closeModal}
+                   ></lightning-button>
+              </footer>
+           </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+     </template>
+</template>

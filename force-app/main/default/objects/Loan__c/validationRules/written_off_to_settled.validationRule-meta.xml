@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>written_off_to_settled</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISNEW()) &amp;&amp;  ISPICKVAL(PRIORVALUE(Status__c),&quot;Written Off&quot;) &amp;&amp; NOT(OR (ISPICKVAL(Status__c,&quot;Settled&quot;), ISPICKVAL(Status__c,&quot;Written Off&quot;)))</errorConditionFormula>
+    <errorMessage>Status can be changed to &apos;settled&apos; only</errorMessage>
+</ValidationRule>

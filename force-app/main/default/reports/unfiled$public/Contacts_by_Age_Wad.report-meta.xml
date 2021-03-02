@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_19797434</developerName>
+        <masterLabel>Age Intervals</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Contact.Age__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>24</to>
+            </sourceValues>
+            <value>18 - 24</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>24</from>
+                <to>34</to>
+            </sourceValues>
+            <value>25 - 34</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>34</from>
+                <to>44</to>
+            </sourceValues>
+            <value>35 - 44</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>44</from>
+                <to>54</to>
+            </sourceValues>
+            <value>45 - 54</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>54</from>
+                <to>64</to>
+            </sourceValues>
+            <value>55 - 64</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>64</from>
+                <to>74</to>
+            </sourceValues>
+            <value>65 - 74</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>74</from>
+            </sourceValues>
+            <value>&gt; 74</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Sum</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>Contact.Age__c</column>
+        </chartSummaries>
+        <chartType>HorizontalBar</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>BucketField_19797434</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>false</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>SALUTATION</field>
+    </columns>
+    <columns>
+        <field>Contact.Gender__c</field>
+    </columns>
+    <columns>
+        <field>BIRTHDATE</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Contact.Age__c</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>Contact.Target_Group__c</field>
+    </columns>
+    <columns>
+        <field>LEAD_SOURCE</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_19797434</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Contacts by Age</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ContactList</reportType>
+    <scope>my</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

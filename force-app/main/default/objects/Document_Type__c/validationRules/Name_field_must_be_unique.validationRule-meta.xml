@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Name_field_must_be_unique</fullName>
+    <active>true</active>
+    <errorConditionFormula>Name =  VLOOKUP( $ObjectType.Document_Type__c.Fields.Name , $ObjectType.Document_Type__c.Fields.Name, Name)</errorConditionFormula>
+    <errorMessage>This name already exist. Please give a unique name</errorMessage>
+</ValidationRule>

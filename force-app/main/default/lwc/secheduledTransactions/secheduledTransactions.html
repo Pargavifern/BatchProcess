@@ -1,0 +1,29 @@
+<template>
+    
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+            <!-- HEADING AREA -->
+            <div class="slds-p-top_xx-small">
+                <p class="slds-line-height_reset">Loan</p>
+                <h1 class="slds-page-header__title slds-truncate" title="My Accounts">Schedule</h1>
+            </div>
+            <!-- / HEADING AREA -->
+            </div>
+            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                <!-- <lightning-button class="slds-m-around_xx-small" label="Download" type="submit" variant="brand" onclick={handleSubmit}></lightning-button> -->
+                <lightning-button class="slds-m-around_xx-small" label="Download" onclick={handledDownload}></lightning-button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column class="slds-table slds-table_bordered slds-table_striped"
+                min-column-width="20"
+        >
+        </lightning-datatable>
+    </div>    
+</template>

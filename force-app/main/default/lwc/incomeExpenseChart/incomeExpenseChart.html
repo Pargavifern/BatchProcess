@@ -1,0 +1,24 @@
+<template> 
+    <lightning-card>
+        <div if:true={loading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+  
+        <div if:false={dataPresent}>
+            <center>Not enough data to display chart</center>
+        </div>
+        <div if:true={dataPresent}>  
+             <lightning-card title="Income Vs Expense" icon-name="utility:chart"></lightning-card>      
+             <div class="chart" lwc:dom="manual"></div>  
+        </div> 
+   
+        <div class="slds-clearfix">
+            <div class="slds-float_right">
+                <button class="slds-input__icon slds-button slds-button_icon iconheight" onclick={today} >
+                    &nbsp;&nbsp; {dateTimeValue} &nbsp;&nbsp;        
+                    <lightning-icon icon-name="utility:refresh" size="x-small" alternative-text="icon" ></lightning-icon>
+                </button>
+            </div>              
+        </div>          
+    </lightning-card>
+</template>

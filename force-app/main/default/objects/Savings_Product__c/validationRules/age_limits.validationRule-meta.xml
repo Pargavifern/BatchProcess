@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>age_limits</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(!ISNULL( Maximum_Age__c), !ISNULL(  Minimum_Age__c ), Minimum_Age__c &gt; Maximum_Age__c)</errorConditionFormula>
+    <errorMessage>Age limits are invalid</errorMessage>
+</ValidationRule>

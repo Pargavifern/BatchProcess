@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Disbursal_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISNULL(Disbursal_Date__c),false,Disbursal_Date__c&gt;  Initial_Payment_Date__c || Disbursal_Date__c &lt;  Application_Date__c )</errorConditionFormula>
+    <errorDisplayField>Disbursal_Date__c</errorDisplayField>
+    <errorMessage>Disbursal Date must be between application date and initial payment date</errorMessage>
+</ValidationRule>

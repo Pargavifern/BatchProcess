@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>48.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="suspenseEndDate" label="Suspend End Date" role="inputOnly" type="Date"/>
+            
+            <property name="accruedInterest" label="Accrued Interest" role="inputOnly" type="integer"/>
+            
+            <property name="suspenseInterest" label="Suspense Interest" role="outputOnly" type="integer"/>
+            
+            <property name="suspenseOption" label="Suspense Option" type="String" role="inputOnly"/>
+            
+            <property name="transactionDate" type="Date"/>
+            
+            <property name="interestAmount" type="String"/>
+            
+            <property name="rate" type="string" role="inputOnly"/>
+            
+            <property name="InterestFrequency" type="string" role="inputOnly"/>
+            
+            <property name="dayCount" type="string" role="inputOnly"/>
+            
+            <property name="interestBalance" type="string" role="inputOnly"/>
+            
+            <property name="PaymentFrequency" type="string" role="inputOnly"/>
+            
+            <property name="principalBalance" type="string" role="inputOnly"/>
+            
+            <property name="calculationMethod" type="string" role="inputOnly"/>
+            
+            <property name="lastPaymentDate" type="Date" role="inputOnly"/>
+            
+            <property name="activeRecord" label="Suspended Record" role="inputOnly" type="boolean"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

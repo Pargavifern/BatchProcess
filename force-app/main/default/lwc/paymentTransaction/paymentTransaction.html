@@ -1,0 +1,218 @@
+<template>
+  <lightning-card>
+    <div class="slds-var-p-around_x-small">
+      <div class="slds-form">
+        <div class="slds-form__row">
+        <div class="slds-form__item">
+            <lightning-input required type="date" class="slds-size_1-of-1" label="Transaction Date" min = {_lastPaymentDate} value={_transactionDate} onchange={transactionDateChange}>
+            </lightning-input>
+        </div>
+        <div class="slds-form__item">
+            <lightning-combobox 
+            required
+            label="Payment Method"
+            class="slds-size_1-of-1"
+            value={_paymentMethod}
+            placeholder="Select payment method"
+            options={paymentMethodOptions}
+            onchange={paymentMethodChange} >
+          </lightning-combobox>
+        </div>
+      </div>
+      </div>
+      <div class="slds-form" role="list">
+        <div class="slds-form__row">
+          <div class="slds-form__item " role="listitem">
+            <div
+              class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Total Balance</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <lightning-formatted-number value={_actualTotalBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form__item" role="listitem">
+            <div
+              class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Principal Balance</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <lightning-formatted-number value={_principalBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div
+              class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Interest Balance</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <lightning-formatted-number value={_actualInterestBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form__item" role="listitem">
+            <div
+              class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Fee Balance</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <lightning-formatted-number value={_feeBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-1">
+          <lightning-textarea name="input7"  value={_comments} label="Comments" onchange={handleComment}></lightning-textarea>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="slds-var-p-around_x-small">
+      <div class="c-container ">
+        <lightning-layout vertical-align="stretch" multiple-rows="true" class="medium">
+          <lightning-layout-item flexibility="auto" size="12" small-device-size="3" medium-device-size="3" large-device-size="3"
+          class="slds-border_top slds-border_left slds-border_bottom slds-border_right">
+            <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold">
+              Total
+            </div>
+          <lightning-card>
+            <div class="slds-var-p-around_medium">
+              <span class="slds-form-element__label slds-align_absolute-center">Opening Balance</span>
+              <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static slds-align_absolute-center">
+                    <lightning-formatted-number value={_totalBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div slot="footer">
+              <span class="slds-form-element__label">Closing Balance</span>
+              <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    <lightning-formatted-number value={_closingBalanceTotal} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number></div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-var-p-horizontal_small">
+              <lightning-input type="number" class="inpTotal" label="Amount" step="0.01" value={_total} onchange={totalChange}>
+              </lightning-input>
+            </div>
+          </lightning-card>
+        </lightning-layout-item>
+          <lightning-layout-item flexibility="auto" size="12" small-device-size="3" medium-device-size="3" large-device-size="3"
+            class="slds-border_top slds-border_left slds-border_bottom slds-border_right">
+           
+              <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold">
+                Principal
+              </div>
+            <lightning-card>
+              
+              <div class="slds-var-p-around_medium">
+                <span class="slds-form-element__label slds-align_absolute-center">Opening Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static slds-align_absolute-center">
+                      <lightning-formatted-number value={_principalBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div slot="footer">
+                <span class="slds-form-element__label">Closing Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-formatted-number value={_closingBalancePrincipal} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number></div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-var-p-horizontal_small">
+                <lightning-input type="number" class="inpPrincipal" label="Amount" step="0.01" value={_principal} onchange={principalChange}>
+                </lightning-input>
+              </div>
+            </lightning-card>
+          </lightning-layout-item>
+          <lightning-layout-item flexibility="auto" size="12" small-device-size="3" medium-device-size="3" large-device-size="3"
+            class="slds-border_top slds-border_left slds-border_bottom slds-border_right">
+            <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold
+            ">
+              Interest
+            </div>
+            <lightning-card>
+              
+              <div class="slds-var-p-around_medium">
+                <span class="slds-form-element__label slds-align_absolute-center">Opening Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static slds-align_absolute-center">
+                      <lightning-formatted-number value={_interestBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div slot="footer">
+                <span class="slds-form-element__label">Closing Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-formatted-number value={_closingBalanceInterest} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number></div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-var-p-horizontal_small">
+                <lightning-input type="number" class="inpInterest" label="Amount" step="0.01" value={_interest} onchange={interestChange}>
+                </lightning-input>
+              </div>
+            </lightning-card>
+
+          </lightning-layout-item>
+          <lightning-layout-item flexibility="auto" size="12" small-device-size="3" medium-device-size="3" large-device-size="3"
+            class="slds-border_top slds-border_left slds-border_bottom slds-border_right">
+            <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold
+            ">
+              Fees
+            </div>
+            <lightning-card>
+             
+              <div class="slds-var-p-around_medium">
+                <span class="slds-form-element__label slds-align_absolute-center">Opening Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static slds-align_absolute-center">
+                      <lightning-formatted-number value={_feeBalance} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div slot="footer">
+                <span class="slds-form-element__label">Closing Balance</span>
+                <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-formatted-number value={_closingBalanceFee} format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number></div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-var-p-horizontal_small">
+                <lightning-input type="number" class="inpFee"  label="Amount" step="0.01" value={_fee} onchange={feeChange}>
+                </lightning-input>
+              </div>
+            </lightning-card>
+          </lightning-layout-item>
+        </lightning-layout>
+      </div>
+    </div>
+  </lightning-card>
+</template>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>50.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <masterLabel>Suspend Options Interest charge</masterLabel>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="accruedInterest" label="New Accrued Interest" role="outputOnly" type="Integer"/>
+            
+            <property name="transactionDate" label="Transaction Date" role="inputOnly" type="DateTime"/>
+            
+            <property name="newEndDate" label="New Suspense End Date" type="DateTime"/>
+            
+            <property name="chargeAmountOriginal" label="Charged Amount" role="inputOnly" type="Integer"/>
+            
+            <property name="extendSuspend" label="Extend Suspend" type="Boolean"/>
+            
+            <property name="endSuspend" label="End Suspend" type="Boolean"/>
+            
+            <property name="rate" type="string" label="Rate" role="inputOnly"/>
+            
+            <property name="interestFrequency" label="Interest Frequency" type="string" role="inputOnly"/>
+            
+            <property name="dayCount" label="Day Count" type="string" role="inputOnly"/>
+            
+            <property name="paymentFrequency" label="Payment Frequency" type="string" role="inputOnly"/>
+            
+            <property name="principalBalance" label="Principal Balance" type="string" role="inputOnly"/>
+            
+            <property name="calculationMethod" label="Calculation Method" type="string" role="inputOnly"/>
+            
+            <property name="lastInterestCharged" label="Last Interest Charged" type="Date" role="inputOnly"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

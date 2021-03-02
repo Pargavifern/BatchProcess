@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_Maximum_exceeds</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Variable&apos;,
+NOT(ISBLANK(Default_Amount__c)),
+Default_Amount__c &gt; Maximum__c
+
+)</errorConditionFormula>
+    <errorDisplayField>Default_Amount__c</errorDisplayField>
+    <errorMessage>Default amount should be less than maximum</errorMessage>
+</ValidationRule>

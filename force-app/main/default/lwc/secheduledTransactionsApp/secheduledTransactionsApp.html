@@ -1,0 +1,63 @@
+<template>
+    <div>
+        <div class="spinner"  if:true={spinner}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+        <div class="slds-page-header" role="banner">
+            <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+            <!-- HEADING AREA -->
+            <div class="slds-p-top_small">
+                <h1 class="slds-page-header__title slds-truncate">Terms</h1>
+            </div>
+            <!-- / HEADING AREA -->
+         
+           
+            </div>
+            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                <!-- <lightning-button class="slds-m-around_xx-small" label="Download" type="submit" variant="brand" onclick={handleSubmit}></lightning-button> -->
+               
+                <lightning-button class="slds-m-around_xx-small" label="Download" onclick={handleDownload}></lightning-button>
+                <lightning-button class="slds-m-around_xx-small" label="Calculate" type="submit" variant="brand" onclick={handleSubmit}></lightning-button>
+            </div>
+            </div>
+           </div>
+           <div class="myapp">
+            <lightning-record-edit-form 
+            record-id={recordId}
+            record-type-id={recordTypeId}
+            object-api-name={objectApiName}  onsuccess={handleSuccess} onerror={handleError}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-grid slds-var-p-around_medium">
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input-field field-name="Amount__c" required="true"></lightning-input-field> 
+                    <lightning-input-field field-name="Term__c" required="true"></lightning-input-field> 
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input-field field-name="Disbursal_Date__c"></lightning-input-field>
+                    <lightning-input-field field-name="Repayment_Frequency__c" required="true"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input-field field-name="Initial_Payment_Date__c"></lightning-input-field>
+                    <lightning-input-field field-name="Rate__c" required="true"></lightning-input-field>
+                </div>
+                
+            </div> 
+        </lightning-record-edit-form>
+
+           </div>
+           &nbsp;
+           <h1  class="slds-page-header__title slds-truncate" title="My Accounts">&nbsp;&nbsp; Schedule&nbsp;&nbsp; </h1>
+           &nbsp;
+    </div>
+    <div>
+        <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column class="slds-table slds-table_bordered slds-table_striped"
+                min-column-width="20"
+        >
+        </lightning-datatable>
+    </div>    
+</template>

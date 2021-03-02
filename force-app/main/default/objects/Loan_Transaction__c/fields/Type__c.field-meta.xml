@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Payment</fullName>
+                <default>true</default>
+                <label>Payment</label>
+            </value>
+            <value>
+                <fullName>Disbursal</fullName>
+                <default>false</default>
+                <label>Disbursal</label>
+            </value>
+            <value>
+                <fullName>Charge</fullName>
+                <default>false</default>
+                <label>Charge</label>
+            </value>
+            <value>
+                <fullName>Transfer</fullName>
+                <default>false</default>
+                <label>Transfer</label>
+            </value>
+            <value>
+                <fullName>Adjustment</fullName>
+                <default>false</default>
+                <label>Adjustment</label>
+            </value>
+            <value>
+                <fullName>Reversal</fullName>
+                <default>false</default>
+                <label>Reversal</label>
+            </value>
+            <value>
+                <fullName>Recovery</fullName>
+                <default>false</default>
+                <label>Recovery</label>
+            </value>
+            <value>
+                <fullName>Capitalisation</fullName>
+                <default>false</default>
+                <label>Capitalisation</label>
+            </value>
+            <value>
+                <fullName>Write Off - Regular</fullName>
+                <default>false</default>
+                <label>Write Off - Regular</label>
+            </value>
+            <value>
+                <fullName>Write Off - Discard</fullName>
+                <default>false</default>
+                <label>Write Off - Discard</label>
+            </value>
+            <value>
+                <fullName>Suspend Interest</fullName>
+                <default>false</default>
+                <label>Suspend Interest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

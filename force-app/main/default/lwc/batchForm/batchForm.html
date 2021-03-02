@@ -1,0 +1,13 @@
+<template>
+    <lightning-button label="Get Data" onclick={getData}></lightning-button>
+    <div if:true={recordFound} class="slds-media__body">
+                <lightning-datatable
+                    data={data}
+                    columns={columns}
+                    key-field="id"
+                    show-row-number-column="true"
+                    onrowselection={getSelectedRecords}
+                    >
+                </lightning-datatable>
+        </div>
+</template>

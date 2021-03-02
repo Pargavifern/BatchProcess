@@ -1,0 +1,36 @@
+<template> 
+    <lightning-card>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Fee Name</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            {feeName}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Fee Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={feeBalance}
+                                format-style="currency"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input required type="date" class="tp" label="Transaction Date" min={_lastTransactionDate}  value={transactionDate} onchange={transactionDateChange} >
+                </lightning-input>
+              </div>
+                 <div class="slds-col slds-size_1-of-2">
+                  <lightning-input required type="number" step="0.001" label="Amount" class="amountvalid" min="0" max={feeBalance} value={amount}  onchange={handleAmountChange}   ></lightning-input>
+              </div>
+            
+            </div>
+    </lightning-card>
+</template>

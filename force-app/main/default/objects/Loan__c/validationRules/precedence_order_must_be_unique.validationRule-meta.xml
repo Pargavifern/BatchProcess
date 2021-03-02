@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>precedence_order_must_be_unique</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( ISPICKVAL(Principal_Order__c , &apos;&apos;)&amp;&amp; 
+    ISPICKVAL(Fees_Order__c , &apos;&apos;) &amp;&amp; 
+    ISPICKVAL(Insurance_Order__c, &apos;&apos;) &amp;&amp; 
+    ISPICKVAL(Interest_Order__c  , &apos;&apos;) , FALSE ,
+( TEXT( Principal_Order__c ) == TEXT( Fees_Order__c ) ) || 
+( TEXT( Principal_Order__c ) == TEXT(  Insurance_Order__c ) ) ||
+( TEXT( Principal_Order__c ) == TEXT(  Interest_Order__c ) ) ||
+( TEXT( Fees_Order__c ) == TEXT( Insurance_Order__c ) ) ||
+( TEXT( Fees_Order__c ) == TEXT( Interest_Order__c ) ) ||
+( TEXT(  Insurance_Order__c ) == TEXT( Interest_Order__c ) )
+)</errorConditionFormula>
+    <errorMessage>Ensure each Payment element has a unique priority number between 1 and 4</errorMessage>
+</ValidationRule>

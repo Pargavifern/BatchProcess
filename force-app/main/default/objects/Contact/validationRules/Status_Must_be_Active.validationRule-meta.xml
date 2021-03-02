@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Must_be_Active</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Priorvalue(Active__c)=true,ISCHANGED(Active__c))</errorConditionFormula>
+    <errorMessage>Status must be in Active while create a new contact</errorMessage>
+</ValidationRule>

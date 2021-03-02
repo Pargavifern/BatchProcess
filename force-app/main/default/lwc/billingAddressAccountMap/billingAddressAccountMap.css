@@ -1,0 +1,6 @@
+.slds-card{
+    border-radius: var(--lwc-borderRadiusMedium,0.25rem) var(--lwc-borderRadiusMedium,0.25rem) 0px 0px;
+}
+.slds-grid{
+    padding-right: 1px;
+}

@@ -1,0 +1,50 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters alignElements slds-var-p-around_large slds-p-top_none">
+        <div if:true={activeRecord} class="slds-col slds-size_1-of-1">
+            <p class="slds-var-p-horizontal_x-small slds-var-p-bottom_x-small">
+                This Loan's Interest is currently suspended. Change the end date to to update the suspension period.
+            </p>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-form-element_readonly  slds-var-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={balance} format-style="currency">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-form-element_readonly slds-var-p-horizontal_x-small">
+                <span class="slds-form-element__label">Transaction Type</span>
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                        <lightning-formatted-text value="Suspend Interest" > </lightning-formatted-text>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+            <lightning-input required type="date" disabled={activeRecord} label="Start Date" min={_lastTransactionDate} value={_startDate} onchange={handleStartDate}>
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+            <lightning-input type="date" label="End Date" class="endDatehtml" min={_startDate} value={_endDate} onchange={handleEndDate}>
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-var-p-top_small">
+            <lightning-combobox class="ttype"
+                    required
+                    name="suspenseType"
+                    label="Suspense Type"
+                    value={_suspenseType}
+                    options={options}
+                    onchange={handleChange} ></lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-var-p-top_small" >
+            <lightning-textarea name="input1" label="Comments" onchange={handleComment}></lightning-textarea>
+        </div>
+    </div>
+</template>

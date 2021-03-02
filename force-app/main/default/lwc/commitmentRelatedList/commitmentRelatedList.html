@@ -1,0 +1,153 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom87" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> Summary </b> </h2>
+                </div>
+            </header>
+        </div>
+ 
+        <div class="slds-media__body">
+            <lightning-record-edit-form
+                record-id={recordId}
+                object-api-name="Loan__c"
+                onload={loadForm}>
+                <div class="slds-grid slds-wrap slds-gutters slds-var-p-left_large slds-var-p-right_large">
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <span class="slds-form-element__label">Total Committed Amount</span>
+                        <lightning-output-field variant="label-hidden" field-name="Amount__c">
+                        </lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <lightning-output-field field-name="Total_Disbursed__c">
+                        </lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <lightning-output-field field-name="Decommitted_Amount__c">
+                        </lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <lightning-output-field field-name="Recommitted_Amount__c">
+                        </lightning-output-field>
+                    </div>
+                </div>
+             </lightning-record-edit-form>
+        </div>
+    </div>
+
+   <!-- Realted list -->
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom87" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" onclick={relatedListPage} class="slds-card__header-link slds-truncate" title="Commitments">
+                          <span>Commitments ({recordCount})</span>
+                        </a>
+                      </h2>
+                </div>
+                <div class="slds-no-flex"> 
+                  <lightning-button label="New" title="Non-primary action" onclick={openNewRecord} class="slds-var-m-left_x-small"></lightning-button>
+                </div>
+            </header>
+        </div>
+ 
+        <div if:true={recordFound} class="slds-media__body">
+                <lightning-datatable
+                    hide-checkbox-column 
+                    data={data}
+                    columns={columns}
+                    key-field="id"
+                    onrowaction={handleRowActions}
+                    >
+                </lightning-datatable>
+        </div>
+        <footer if:true={recordFound} class="slds-card__footer">
+            <a class="slds-card__footer-action" onclick={relatedListPage} href="javascript:void(0);">View All </a>
+          </footer>
+    </div>
+
+    <div if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class={popupClass}>
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{heading} Commitment</h2>
+                </header>
+                <div class="slds-modal__content" style="overflow-y: auto;" id="modal-content-id-1">
+
+                    <div if:true={showLoadingSpinner}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                    
+                    <!-- record creation model popup -->
+                    <div if:true={recordCreate}>
+                        <lightning-record-edit-form 
+                                    record-id={commitmentId}
+                                    object-api-name="Commitment_History__c"
+                                    form-class="slds-p-around_large"
+                                    density="comfy"
+                                    oncancel={closeModal}
+                                    onerror={handleError}
+                                    onsuccess={handleSuccess}>
+                            <lightning-messages> </lightning-messages>
+                            <div class="slds-grid slds-wrap slds-gutters slds-var-p-around_large slds-p-top_none">
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Amount__c" required> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Loan__c" value={recordId} disabled> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Type__c"> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Date__c"> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small slds-var-p-bottom_small">
+                                    <lightning-input-field field-name="Reason__c"> </lightning-input-field>
+                                </div>
+                            </div>
+                            <footer class="slds-modal__footer" style="margin-top: 0px; margin-right: -24px; margin-bottom: -24px; margin-left: -24px;">
+                                <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={closeModal}> </lightning-button>
+                                <lightning-button variant="brand" class="slds-var-m-left_small" type="submit" label="Save"></lightning-button>
+                            </footer>
+                        </lightning-record-edit-form>
+                    </div>
+
+                    <!-- record delete modal pop up -->
+                    <div if:true={recordDelete}>
+                        <div class="detail slds-text-align_center slds-var-p-around_large"> Are you sure you want to delete this Commitment? </div>
+                    </div>
+                </div>
+                <!-- footer for the record delete-->
+                <div if:true={recordDelete}>
+                    <footer class="slds-modal__footer slds-var-p-top_small">
+                        <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={closeModal}> </lightning-button>
+                        <lightning-button variant="brand" class="slds-var-m-left_small" onclick={deleteRecord} label="Delete"></lightning-button>
+                    </footer>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

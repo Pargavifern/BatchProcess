@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Precedence_order_must_be_unique</fullName>
+    <active>true</active>
+    <errorConditionFormula>( TEXT( Principal_Order__c ) == TEXT( Fees_Order__c ) ) ||
+( TEXT( Principal_Order__c ) == TEXT( Insurance_Order__c ) ) ||
+( TEXT( Principal_Order__c ) == TEXT( Interest_Order__c ) ) ||
+( TEXT( Fees_Order__c ) == TEXT( Insurance_Order__c ) ) ||
+( TEXT( Fees_Order__c ) == TEXT( Interest_Order__c ) ) ||
+( TEXT( Insurance_Order__c ) == TEXT( Interest_Order__c ) )</errorConditionFormula>
+    <errorMessage>Ensure each Payment element has a unique priority number between 1 and 4</errorMessage>
+</ValidationRule>

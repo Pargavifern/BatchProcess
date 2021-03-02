@@ -1,0 +1,95 @@
+<template>
+        <div class="container" lwc:dom="manual"></div>
+<div class="test-listViewManager slds-card slds-card_boundary slds-grid slds-grid--vertical forceListViewManager">
+        <div class="slds-page-header slds-page-header_record-home">
+             <div class="slds-page-header__row">
+             <div class="slds-page-header__col-title">
+             <div class="slds-media">
+             <div class="slds-media__figure">
+             <span class="slds-icon_container slds-icon-standard-opportunity">
+                <lightning-icon icon-name="custom:custom87" alternative-text="Connected">
+                </lightning-icon>     
+             </span>
+             </div>
+             <div class="slds-media__body">
+             <div class="slds-page-header__name">
+             <div class="slds-page-header__name-title">
+             <h1> <span>Applications</span>
+                <span class="slds-page-header__title slds-truncate" title="Online">Online</span>
+             </h1>
+             </div>
+             </div>
+             </div>
+             </div>
+             </div>
+             <div class="slds-page-header__col-actions">
+             <div class="slds-page-header__controls">
+             
+             <div class="slds-page-header__control">
+             <ul class="slds-button-group-list">
+                <li>
+                        <lightning-button label="Approve" onclick={handleApprovalApplications}></lightning-button>
+                </li>
+                <li>
+                        <lightning-button label="Cancel" onclick={handleCancelApplications}></lightning-button>
+                </li>
+             </ul>
+             
+             </div>
+             
+             </div>
+             </div>
+             </div>
+             <div class="slds-page-header__row">
+                <div class="slds-page-header__col-meta">
+                  <p class="slds-page-header__meta-text">{recordCount} items • Updated <lightning-relative-date-time value={recordFetchedTime}></lightning-relative-date-time></p>
+                </div>
+        </div>
+             
+             </div>
+             <div if:true={recordFound} class="slds-media__body">
+                <lightning-datatable
+                show-row-number-column="true"
+                enable-infinite-loading
+                data={data}
+                columns={columns}
+                sorted-by={sortBy}
+                sorted-direction={sortDirection}
+                onsort={handleSortdata}
+                key-field="id"
+                selected-rows={multipleRecords}
+                onrowselection={getSelectedRecords}
+                onrowaction={handleRowActions}>
+              </lightning-datatable> 
+              <div if:true={showLoadingSpinner}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </div>
+ </div>
+</template>
+             
+       <!-- <lightning-card title = "Applications" icon-name = "custom:custom18">
+                <lightning-button-group>
+                        <lightning-button label="Approve" onclick={handleApprovalApplications}></lightning-button>
+                        <lightning-button label="Cancel" onclick={handleCancelApplications}></lightning-button>
+                </lightning-button-group>
+  
+                <div if:true={recordFound} class="slds-media__body">
+                        <lightning-datatable
+                        show-row-number-column="true"
+                        enable-infinite-loading
+                        data={data}
+                        columns={columns}
+                        sorted-by={sortBy}
+                        sorted-direction={sortDirection}
+                        onsort={handleSortdata}
+                        key-field="id"
+                        onrowselection={getSelectedRecords}
+                        onrowaction={handleRowActions}>
+                      </lightning-datatable> 
+                      <div if:true={showLoadingSpinner}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                </div>
+        </lightning-card>
+</template>-->

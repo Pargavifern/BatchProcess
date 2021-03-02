@@ -1,0 +1,137 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:shift_type" alternative-text="Event"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-card__header-title ">
+                        Finances
+                    </h1>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_small">
+                    <div class="slds-text-body_regular slds-text-color_weak">Loan applications are subject to approval. The amount requested by
+                        the Contact may be changed during this process.</div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <c-look-up obj-name="Loan_Product__c" icon-name="custom:custom45" required unique-key='Loan_in_calculator'
+                        label-name="Loan Product" onvalueselect={LoanProductChanged} create-record=true> </c-look-up>
+                        <div if:true={fpRequired} class="slds-text-color_error" >Please choose the Loan Product</div>
+                </div>
+                <!-- <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-combobox name="combobox-loan_product" label="Interest Product" class="inp" placeholder="--None--"
+                        required="" value={selectedInterestProductValue} options={interestProductOptions}
+                        onchange={interestProductChanged}>
+                    </lightning-combobox>
+                </div> -->
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <lightning-combobox name="calculationMethod" label="Calculation Method"
+                        value={calculationMethod} options={calculationOptions}
+                        onchange={handleCalculationMethodChange}>
+                    </lightning-combobox>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small" if:true={amountShown}>
+                    <lightning-input class="amt" name="input-amount" label="Amount" type="number" value={amount}
+                        formatter="currency" required="" min={minAmount} max={maxAmount} step=".01"
+                        onchange={amountChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small" if:true={repaymentAmountShown}>
+                    <lightning-input class="repayAmt" name="input-repayment-amount" label="Repayment Amount" type="number" value={repaymentAmount}
+                        formatter="currency" required="" min="0" max={maxAmount} step=".01"
+                        onchange={repaymentAmountChanged}> 
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-combobox name="repaymentFrequency" label="Repayment Frequency"
+                        value={selectedRepaymentFrquency} options={repaymentOptions}
+                        onchange={handleRepaymentFrequencyChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small" if:true={termShown}>
+                    <lightning-input class="term" name="input-term" label={termInputLabel} type="number" value={selectedTerm}
+                         required="" 
+                        onchange={termChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class=rt name="input-rate" disabled={disableRate} min={minRate} max={maxRate}  label={rateLabel} type="number" value={selectedRate}
+                        formatter="number" required="" step="0.001"
+                        onchange={rateInputChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="disbersaldt"  type="date" name="disbersalDate" label="Disbursal Date"  value={disbursalDate}
+                    onchange={disbursalDateChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="dt"  type="date" name="input-date" label="Initial Payment Date"  value={initialpaymentdate}
+                    onchange={dateInputChange}></lightning-input>
+                </div>
+            </div>
+        </div>
+            <div class="slds-card__body slds-card__body_inner" if:true={advanced}>
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="loon" name="balloon-amount" label="Balloon Amount" type="number" value={balloonAmount}
+                        formatter="currency" required="" min="0" max={amount} step="1.00" onblur={handleCustomValidationPeriodsDeferredWithGrace}
+                        onchange={balloonAmountChanged}>
+                    </lightning-input>
+                </div> 
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input name="periods-deferred-with-grace" label="Periods Deferred with Grace" type="number" value={periodsDeferredWithGrace}
+                        formatter="number" required="" min="0" max={maxTerm} step="1.00" onblur={handleCustomValidationPeriodsDeferredWithGrace}
+                        onchange={periodsDeferredWithGraceChanged} class="inputPeriodsDeferredWithGrace">
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input   name="seasonal-payments" label="Seasonal Periods without Payment" type="text" value={seasonalPeriods}
+                        onblur={handleCustomValidationSeasonalPayments}
+                        onchange={seasonalPeriodsChanged} class="inputSeasonalPeriods">
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input class="sea" name="seasonal-payment-amount" label="Seasonal Payment Amount" type="number" value={seasonalPaymentAmount}
+                        formatter="currency" required="" min="0" max={amount} step="1.00"
+                        onchange={seasonalPaymentAmountChanged}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <label class="slds-form-element__label slds-no-flex" for="seasonal-interest-check">Pay Seasonal Interest</label>
+                    <lightning-input name="seasonal-interest-check" type="checkbox" class="seasonal-interest-checkbox"
+                        onchange={seasonalInterestChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small" if:false={annualRepaymentFrequency}>
+                    <label class="slds-form-element__label slds-no-flex" for="seasonal-repeat-check">Repeat Seasonal Periods</label>
+                    <lightning-input name="seasonal-repeat-check" type="checkbox"  class="seasonal-repeat-checkbox"
+                        onchange={seasonalRepeatChanged}>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+        <footer class="slds-card__footer">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <div class="slds-float_left">
+                        <lightning-button label={AdvancedLabel} title="Advanced" variant="Base"
+                            class="slds-m-left_x-small" onclick={advancedClicked}></lightning-button>
+                    </div>
+                    <div class="slds-float_right">
+                        <lightning-button label="Calculate" title="Calculate" variant="brand"
+                            class="slds-m-left_x-small" onclick={recalculateClicked}></lightning-button>
+                    </div>
+                </div>
+            </div>
+</footer>
+    </article>
+    <c-new-record-lookup obj-name="Loan_Product__c" unique-key='Loan_in_calculator'></c-new-record-lookup> 
+</template>

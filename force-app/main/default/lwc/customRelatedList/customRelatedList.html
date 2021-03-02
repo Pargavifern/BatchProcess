@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom17" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title slds-text-title_bold"> Transactions Lines </h2>
+                </div>
+            </header>
+        </div>
+       
+                <div class="slds-media__body">
+                    <lightning-datatable
+                    hide-checkbox-column 
+                    data={data}
+                    columns={columns}
+                    key-field="id"
+                    ></lightning-datatable>
+                </div>
+          
+
+    </div>
+</template>

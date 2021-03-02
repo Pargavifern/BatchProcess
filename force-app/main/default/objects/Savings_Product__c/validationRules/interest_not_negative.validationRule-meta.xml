@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>interest_not_negative</fullName>
+    <active>true</active>
+    <errorConditionFormula>Default_Interest_Rate__c &lt; 0 ||  Maximum_Interest_Rate__c &lt; 0 ||  Minimum_Interest_Rate__c &lt; 0</errorConditionFormula>
+    <errorMessage>Interest rate must be positive</errorMessage>
+</ValidationRule>

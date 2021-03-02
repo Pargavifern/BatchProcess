@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_Maximum_empty</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Variable&apos;,
+NOT(ISBLANK(Default_Amount__c)),
+ISBLANK(Maximum__c)
+)</errorConditionFormula>
+    <errorDisplayField>Maximum__c</errorDisplayField>
+    <errorMessage>Please enter maximum value</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+{
+    "orgName": "Fern Software",
+    "edition": "Developer",
+    "features": ["StateAndCountryPicklist","DevelopmentWave","EinsteinBuilderFree"],
+    "settings": {
+        "pathAssistantSettings": {
+            "pathAssistantEnabled": true
+        },
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        },
+        "mobileSettings": {
+            "enableS1EncryptedStoragePref2": true
+        }
+    }
+}

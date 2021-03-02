@@ -1,0 +1,135 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="standard:account" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> Summary </b> </h2>
+                </div>
+            </header>
+        </div>
+ 
+        <div class="slds-media__body">
+            <lightning-record-edit-form
+                record-id={recordId}
+                object-api-name="Account">
+                <div class="slds-grid slds-wrap slds-gutters slds-var-p-left_large slds-var-p-right_large">
+                   <!--  <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <span class="slds-form-element__label">Total Committed Amount</span>
+                        <lightning-output-field variant="label-hidden" field-name="Amount__c">
+                        </lightning-output-field>
+                    </div> -->
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <lightning-output-field field-name="Risk_Level__c">
+                        </lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                        <lightning-output-field field-name="Total_Risk_Score__c">
+                        </lightning-output-field>
+                    </div>
+                </div>
+             </lightning-record-edit-form>
+        </div>
+    </div>
+
+    <!-- Related List -->
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="standard:account" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" onclick={relatedListPage} class="slds-card__header-link slds-truncate" title="Commitments">
+                          <span>Risk Rating </span>
+                        </a>
+                      </h2>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                    <lightning-button class="slds-m-around_xx-small" label="Download" onclick={handleDownload}></lightning-button>
+                </div>
+            </header>
+        </div>
+ 
+        <div if:true={recordFound} class="slds-media__body">
+                <lightning-tree-grid
+                    hide-checkbox-column 
+                    data={data}
+                    columns={columns}
+                    key-field="Id"
+                    expanded-rows={gridExpandedRows}
+                    onrowaction={handleRowActions}
+                    >
+                </lightning-tree-grid>
+        </div>
+
+    </div>
+
+    <div if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Risk Rating</h2>
+                </header>
+                <div class="slds-modal__content"  id="modal-content-id-1"> <!-- style="overflow-y: auto;" -->
+
+                    <div if:true={showLoadingSpinner}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                        <lightning-record-edit-form 
+                                    record-id={riskId}
+                                    object-api-name="Risk_Rating__c"
+                                    form-class="slds-p-around_large"
+                                    density="comfy"
+                                    onsubmit={handleSubmit}
+                                    oncancel={closeModal}
+                                    onerror={handleError}
+                                    onsuccess={handleSuccess}>
+                            <lightning-messages> </lightning-messages>
+                            <div class="slds-grid slds-wrap slds-gutters slds-var-p-around_large slds-p-top_none">
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Name" required> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Account__c" disabled> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Category__c" disabled> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                                    <lightning-input-field field-name="Risk_Rating__c"> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small slds-var-p-bottom_small">
+                                    <lightning-input-field field-name="Category_Weight__c"> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small slds-var-p-bottom_small">
+                                    <lightning-input-field field-name="Rating__c"> </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-var-p-top_small slds-var-p-bottom_small">
+                                    <lightning-input-field field-name="Rationale__c"> </lightning-input-field>
+                                </div>
+                            </div>
+                            <footer class="slds-modal__footer" style="margin-top: 0px; margin-right: -24px; margin-bottom: -24px; margin-left: -24px;">
+                                <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={closeModal}> </lightning-button>
+                                <lightning-button variant="brand" class="slds-var-m-left_small" type="submit" label="Save"></lightning-button>
+                            </footer>
+                        </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

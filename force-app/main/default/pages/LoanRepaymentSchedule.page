@@ -1,0 +1,418 @@
+<apex:page cache="false" standardcontroller="Loan__c" renderAs="advanced_pdf" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"
+showHeader="false" sidebar="false">
+    <head>
+        <style>
+            @page{
+                size: A4 landscape;
+            }     
+            @page {
+                padding-top: 70px;
+                @top-center {
+                    content: element(header);P
+                }
+                @bottom-left {
+                    content: element(footer);
+                }
+            }          
+            div.header {
+                padding: 10px;
+                position: running(header);
+
+            }
+            div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+            }
+            .pagenumber:before {
+                content: counter(page);
+            }
+            .pagecount:before {
+                content: counter(pages);
+            }
+            .widthfull {
+                width: 100%
+            }
+            .font7pt {
+                font-size: 10pt;
+            }
+        </style>
+         <style>
+            body {
+                /*font-family: 'Times New Roman', Times, serif;*/
+                /* width: 700px; */
+            }
+            table{
+                -fs-table-paginate: paginate;
+            }
+            .Arial{
+                font-family: 'Arial', Helvetica, sans-serif;
+            }
+            p {
+                text-align: justify;
+            }
+    
+            .fullWidth {
+                width: 100%! important
+            }
+    
+            .col {
+                width: 275px! important
+            }
+    
+            .border,
+            .border-bottom {
+                border-color: black !important;
+            }
+    
+            .fontArial {
+                font-family: Arial;
+            }
+    
+            th {
+                border-bottom: 1px solid black;
+                border-collapse: collapse;
+            }
+    
+            td {
+                padding: 1px;
+            }
+    
+            .font10pt {
+                font-size: 10pt
+            }
+    
+            .font8_5pt {
+                font-size: 8.5pt;
+            }
+    
+            .txtalighRight {
+                text-align: right;
+            }
+    
+    
+    
+            .font10_5pt {
+                font-size: 10.5pt
+            }
+    
+            .floatl {
+                float: left
+            }
+    
+            .floatr {
+                float: right
+            }
+    
+            .widthfull {
+                width: 675%
+            }
+    
+            .font7pt {
+                font-size: 7pt;
+            }
+    
+            .spacer {
+                margin: 0;
+                padding: 0;
+                height: 10px;
+            }
+    
+            .spacer40px {
+                margin: 0;
+                padding: 0;
+                height: 40px;
+            }
+    
+            .spacer60px {
+                margin: 0;
+                padding: 0;
+                height: 60px;
+            }
+    
+            .floatingHead {
+                float: left;
+                width: 225px;
+                border: 1px solid black;
+                margin-right: 10px;
+            }
+    
+            .bottomBorderNone {
+                border-bottom-style: none;
+            }
+    
+            .w-50 {
+                width: 50%;
+            }
+    
+            .italic {
+                font-style: italic;
+            }
+    
+            .align-middle {
+                text-align: center
+            }
+    
+            .padding5px {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+    
+            .padding3px {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+    
+            .box10px {
+                width: 10px;
+                height: 10px;
+                border: 1px solid black;
+            }
+    
+            .box198px {
+                width: 198px;
+                height: 20px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <c:commonHeaderFooter title="Repayment Schedule" disclaimer="For information purposes only. The schedule is valid only if all payments are made on the due date and then only for the date shown. Any other transactions, payments or adjustments will affect the accuracy of the schedule. Please contact lender for more detailed information
+        "/>
+  
+        <div class="content Arial">
+            <div style="width:100%; height:20px">
+                <div class="font10pt" style="width:50%;text-align:right;float:right">
+                    <b>Date : </b>
+                    <apex:outputText value="{0, date, MM/dd/yyyy}">
+                        <apex:param value="{!TODAY()}" />
+                    </apex:outputText>
+                </div>
+            </div>
+            <div style="width:100%; height:10px; border-top: 2px solid black">
+            </div>
+            <div style="width:100%; height:105px">
+                <div class="font10pt" style="float:left; width:33%;display:{!If(Loan__c.RecordType.Name='Business Loan','block','None' )}">
+                    <label style="text-transform: uppercase;">
+                        <b>{!Loan__c.Account__r.Name}</b>
+                        <br />{!Loan__c.Account__r.ShippingStreet},
+                        <br />{!Loan__c.Account__r.ShippingCity},
+                        <br />{!Loan__c.Account__r.ShippingState},
+                        <br />{!Loan__c.Account__r.ShippingCountry}
+                        <br />{!Loan__c.Account__r.ShippingPostalCode}
+                    </label>
+                </div>
+                <div class="font10pt" style="float:left; width:33%;display:{!If(Loan__c.RecordType.Name='Personal Loan','block','None' )}">
+                    <label style="text-transform: uppercase;">
+                        <b>{!Loan__c.Contact__r.Name}</b>
+                        <br />{!Loan__c.Contact__r.MailingStreet},
+                        <br />{!Loan__c.Contact__r.MailingCity},
+                        <br />{!Loan__c.Contact__r.MailingState},
+                        <br />{!Loan__c.Contact__r.MailingCountry}
+                        <br />{!Loan__c.Contact__r.MailingPostalCode}
+                    </label>
+                </div>
+                <div class="font10pt" style="float:left; width:33%">
+                    <div style="width:100%">
+                        <div style="width:60%;float:left">
+                            <b>Loan Number</b>
+                        </div>
+                        <div style="width:40%;float:right">
+                            {!Loan__c.Name}
+                        </div>
+                    </div>
+                    <div style="width:100%">
+                        <div style="width:60%;float:left">
+                            <b>Disbursed Amount</b>
+                        </div>
+                        <div style="width:40%;float:right">
+                            <apex:include pageName="currencySymbol"/>
+                            <apex:outputText value="{0, number, ###,###,##0.00}">
+                                <apex:param value="{!Loan__c.Total_Disbursed__c}" />
+                            </apex:outputText>
+                        </div>
+                    </div>
+                    <div style="width:100%">
+                        <div style="width:60%;float:left">
+                            <b>Issue Date</b>
+                        </div>
+                        <div style="width:40%;float:right">
+                            <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                <apex:param value="{!Loan__c.Disbursed_Date__c}" />
+                            </apex:outputText>
+                        </div>
+                    </div>
+                    <div style="width:100%">
+                        <div style="width:60%;float:left">
+                            <b>Payment Frequency</b>
+                        </div>
+                        <div style="width:40%;float:right">
+                            {!Loan__c.Application__r.Repayment_Frequency__c}
+                        </div>
+                    </div>
+                </div>
+                <div class="font10pt" style="width:33%;text-align:right;float:right">
+                    <div class="font10pt" style="float:left; width:100%">
+                        <div style="width:100%">
+                            <div style="width:60%;float:left">
+                                &nbsp;
+                            </div>
+                            <div style="width:40%;float:right">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div style="width:100%">
+                            <div style="width:60%;float:left">
+                                &nbsp;
+                            </div>
+                            <div style="width:40%;float:right">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div style="width:100%">
+                            <div style="width:60%;float:left">
+                                <b>Total Rate</b>
+                            </div>
+                            <div style="width:40%;float:right">
+                                <apex:outputText value="{0,number,0}%">
+                                    <apex:param value="{!Loan__c.Application__r.Final_Rate__c}" />
+                                </apex:outputText>
+                                
+                            </div>
+                        </div>
+                        <div style="width:100%">
+                            <div style="width:60%;float:left">
+                                <b>Repayment Term</b>
+                            </div>
+                            <div style="width:40%;float:right">
+                                <apex:outputText value="{0, number, ###,##0}">
+                                    <apex:param value="{!Loan__c.Application__r.Term__c}" />
+                                </apex:outputText>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%; height:10px; border-top: 2px solid black">
+            </div>
+            <div style="width:100%" class="font10pt">
+
+               <table width="100%" class="mainTable" style="-fs-table-paginate: paginate;">
+                      <thead style="display: table-header-group;"> 
+                    <tr>
+                        <th>
+                            Line No
+                        </th>
+                        <th>
+                            Repayment Date
+                        </th>
+                        <th class="txtalighRight">
+                            Total Payment (<apex:include pageName="currencySymbol"/>)
+                        </th>
+                        <th class="txtalighRight">
+                            Principal (<apex:include pageName="currencySymbol"/>)
+                        </th>
+
+                        <th class="txtalighRight">
+                            Interest (<apex:include pageName="currencySymbol"/>)
+                        </th>
+                        <th class="txtalighRight">
+                            Fee (<apex:include pageName="currencySymbol"/>)
+                        </th>
+                        <th class="txtalighRight">
+                            Balance (<apex:include pageName="currencySymbol"/>)
+                        </th>
+                    </tr>
+                      </thead>
+                    <apex:variable var="totalAmount" value="{!0}" />
+                    <apex:variable var="totalFee" value="{!0}" />
+                    <apex:variable var="totalInterest" value="{!0}" />
+
+                    <apex:repeat value="{!Loan__c.Scheduled_Transactions__r}" var="item">
+                        <apex:variable value="{!totalAmount+item.Total_Payment__c}" var="totalAmount" />
+                        <apex:variable value="{!totalFee+item.Fees__c}" var="totalFee" />
+                        <apex:variable value="{!totalInterest+item.Interest__c}" var="totalInterest" />
+
+                        <!--increment-->
+                        <tr style="page-break-inside:avoid"> 
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0}">
+                                    <apex:param value="{!item.Payment_Number__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                    <apex:param value="{!item.Scheduled_Date__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="txtalighRight">
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!item.Total_Payment__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="txtalighRight">
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!item.Principal__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="txtalighRight">
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!item.Interest__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="txtalighRight">
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!item.Fees__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="txtalighRight">
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!item.Remaining_Balance__c}" />
+                                </apex:outputText>
+                            </td>
+
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="txtalighRight" style="border-top:1px solid black">
+                            <b>
+                                <apex:include pageName="currencySymbol"/>
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!totalAmount}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td class="txtalighRight" style="border-top:1px solid black">
+                            <b>
+                                <apex:include pageName="currencySymbol"/>
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!Loan__c.Amount__c}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td class="txtalighRight" style="border-top:1px solid black">
+                            <b>
+                                <apex:include pageName="currencySymbol"/>
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!totalInterest}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td class="txtalighRight" style="border-top:1px solid black">
+                            <b>
+                                <apex:include pageName="currencySymbol"/>
+                                <apex:outputText value="{0, number, ###,###,##0.00}">
+                                    <apex:param value="{!totalFee}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</apex:page>

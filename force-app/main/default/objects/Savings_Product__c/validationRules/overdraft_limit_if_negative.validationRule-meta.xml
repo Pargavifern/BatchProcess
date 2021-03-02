@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>overdraft_limit_if_negative</fullName>
+    <active>true</active>
+    <errorConditionFormula>Overdraft_limit__c&lt;0</errorConditionFormula>
+    <errorDisplayField>Overdraft_limit__c</errorDisplayField>
+    <errorMessage>Overdraft Limit should not be negative</errorMessage>
+</ValidationRule>

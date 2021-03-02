@@ -1,0 +1,354 @@
+<apex:page cache="false" standardcontroller="Account" renderAs="advanced_pdf" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false"
+    showHeader="false" sidebar="false">
+    <!-- Begin Default Content REMOVE THIS -->
+
+    <head>
+        <style>
+            @page {
+                size: A4 portrait;
+            }
+
+            @page {
+                padding-top: 70px;
+                @top-center {
+                    content: element(header);
+                    P
+                }
+                @bottom-left {
+                    content: element(footer);
+                }
+            }
+
+            div.header {
+                padding: 10px;
+                position: running(header);
+
+            }
+
+            div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            .widthfull {
+                width: 100%
+            }
+
+            .font7pt {
+                font-size: 10pt;
+            }
+        </style>
+        <style>
+            body {
+                font-family: 'Times New Roman', Times, serif;
+                /* width: 700px; */
+            }
+
+            /* table {
+                -fs-table-paginate: paginate;
+            } */
+
+            .Arial {
+                font-family: 'Arial', Helvetica, sans-serif;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+
+            .fullWidth {
+                width: 100%! important
+            }
+
+            .col {
+                width: 275px! important
+            }
+
+            .border,
+            .border-bottom {
+                border-color: black !important;
+            }
+
+            .fontArial {
+                font-family: Arial;
+            }
+
+            th {
+                border-bottom: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            td {
+                padding: 1px;
+            }
+
+            .font10pt {
+                font-size: 10pt
+            }
+
+            .font8_5pt {
+                font-size: 8.5pt;
+            }
+
+            .txtalighRight {
+                text-align: right;
+            }
+
+
+
+            .font10_5pt {
+                font-size: 10.5pt
+            }
+
+            .floatl {
+                float: left
+            }
+
+            .floatr {
+                float: right
+            }
+
+            .widthfull {
+                width: 675%
+            }
+
+            .font7pt {
+                font-size: 7pt;
+            }
+
+            .spacer {
+                margin: 0;
+                padding: 0;
+                height: 10px;
+            }
+
+            .spacer40px {
+                margin: 0;
+                padding: 0;
+                height: 40px;
+            }
+
+            .spacer60px {
+                margin: 0;
+                padding: 0;
+                height: 60px;
+            }
+
+            .floatingHead {
+                float: left;
+                width: 225px;
+                border: 1px solid black;
+                margin-right: 10px;
+            }
+
+            .bottomBorderNone {
+                border-bottom-style: none;
+            }
+
+            .w-50 {
+                width: 50%;
+            }
+
+            .italic {
+                font-style: italic;
+            }
+
+            .align-middle {
+                text-align: center
+            }
+
+            .padding5px {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+
+            .padding3px {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+
+            .box10px {
+                width: 10px;
+                height: 10px;
+                border: 1px solid black;
+            }
+
+            .box198px {
+                width: 198px;
+                height: 20px;
+                border: 1px solid black;
+            }
+
+            .borderc {
+                border: 1px solid #000;
+                border-collapse: collapse;
+            }
+
+            .tablecls {
+                border-collapse: collapse;
+                border: 1px solid black;
+            }
+
+            .tdcls {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+
+    <body>
+        <c:commonHeaderFooter title="Risk Rating" disclaimer="" showPageNo="Yes" />
+    </body>
+    <div class="content">
+        <div style="width:100%; height:20px">
+            <div class="font10pt" style="padding: 5px;float:left; width:33%;}">
+                <label style="text-transform: uppercase;">
+                    <b>{!Account.Name}</b>
+                    <br />{!Account.ShippingStreet},
+                    <br />{!Account.ShippingCity},
+                    <br />{!Account.ShippingState},
+                    <br />{!Account.ShippingCountry}
+                    <br />{!Account.ShippingPostalCode}
+                </label>
+            </div>
+            <div class="font10pt" style="width:50%;text-align:right;float:right">
+                <b>Date : </b>
+                <apex:outputText value="{0, date, MM/dd/yyyy}">
+                    <apex:param value="{!TODAY()}" />
+                </apex:outputText>
+            </div>
+        </div>
+        <div style="width:100%; height:49px;">
+        </div>
+        <div style="width:99%;" class="font10pt">
+            <table class="borderc" style="width:100%;page-break-after:auto;page-break-before:auto;">
+                <!-- <tr>
+                    <td class="tdcls" style="width:100%">
+                        <b>Risk Rating for: Account.Name</b>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td class="tdcls">
+                        <b> Risk Score: </b>
+                        <apex:outputText value="{0, number, ###}">
+                            <apex:param value="{!Account.Total_Risk_Score__c}" />
+                        </apex:outputText> out of 500
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="tdcls">
+                        <b>Overall Risk Rating: </b> {!Account.Risk_Level__c}</td>
+                </tr>
+            </table>
+        </div>
+        <div style="width:100%; height:25px;">
+        </div>
+        <div style="width:100%; height:23px; background-color:#cecaca;border-top:1px solid black">
+            <div style="padding:2px">
+                <b>Loans</b>
+            </div>
+        </div>
+        <div style="width:100%" class="font10pt">
+
+            <table width="100%;height:25px;">
+                <tr>
+                    <th>
+                        Number
+                    </th>
+                    <th>
+                        Loan Product
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th class="txtalighRight">
+                        Balance
+                    </th>
+                </tr>
+                <apex:variable var="totalAmount" value="{!0}" />
+
+                <apex:repeat value="{!Account.Loans__r}" var="item">
+                    <apex:variable value="{!totalAmount+item.Balance__c}" var="totalAmount" />
+
+                    <!--increment-->
+                    <tr style="page-break-inside:avoid">
+                        <td>
+                            {!item.Name}
+                        </td>
+                        <td>
+                            {!item.Loan_Product__r.Name}
+                        </td>
+                        <td>
+                            {!item.Status__c}
+                        </td>
+                        <td class="txtalighRight">
+                            <apex:outputText value="{0, number, currency}">
+                                <apex:param value="{!item.Balance__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="txtalighRight" style="border-top:1px solid black">
+                        <b>
+                            <apex:outputText value="{0, number, currency}">
+                                <apex:param value="{!totalAmount}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div style="width:100%; height:20px;">
+        </div>
+        <div style="width:99%;" class="font10pt">
+            <table class="borderc" style="width:100%">
+                <tr style="background-color:#cecaca;height:23px;font-size:11pt;font-weight:bold">
+                    <td class="tdcls" style="width:100%" colspan="2">Risk Rating Categories </td>
+                </tr>
+            </table>
+        </div>
+        <div style="width:99%;" class="font10pt">
+            <apex:repeat value="{!Account.Risk_Ratings__r}" var="item">
+                <table class="borderc" style="width:100%;page-break-after:auto;page-break-before:auto;">
+                    <tr style="background-color:#eeeded;height:23px;">
+                        <td class="tdcls" style="width:100%" colspan="2">
+                            <b>{!item.Category__c}:</b> {!item.Risk_Rating__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="tdcls" style="width:50%">
+                            <b>Weight: </b> {!item.Category_Weight__c} </td>
+                        <td class="tdcls" style="width:50%">
+                            <b>Rating: </b> {!item.Rating__c} </td>
+                    </tr>
+                    <!-- <tr>
+                        <td class="tdcls" style="width:50%" colspan="2">
+                            <b>Definition: </b> 3 years of profitability. Substantiated debt service ratio between 1.5 and 1.75</td>
+                    </tr> -->
+                    <tr>
+                        <td class="tdcls" style="width:50%" colspan="2">
+                            <b>Rationale: </b> {!item.Rationale__c}</td>
+                    </tr>
+                </table>
+                <div style="width:100%; height:20px;">
+                </div>
+            </apex:repeat>
+        </div>
+
+    </div>
+    <!-- End Default Content REMOVE THIS -->
+</apex:page>

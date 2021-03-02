@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>50.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="transactionDate" type="Date" role="outputOnly"/>
+            
+            <property name="interestAmount" type="integer" role="outputOnly"/>
+            
+            <property name="rate" type="string" role="inputOnly"/>
+            
+            <property name="interestBalance" type="integer" role="inputOnly"/>
+            
+            <property name="principalBalance" type="integer" role="inputOnly"/>
+            
+            <property name="lastChargedDate" type="Date" role="inputOnly"/>
+            
+            <property name="comments" type="string" role="outputOnly"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

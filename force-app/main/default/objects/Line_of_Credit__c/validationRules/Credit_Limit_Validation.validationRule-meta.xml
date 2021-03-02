@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Limit_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>Credit_Limit__c &lt; Balance__c</errorConditionFormula>
+    <errorDisplayField>Credit_Limit__c</errorDisplayField>
+    <errorMessage>Please ensure Credit Limit Should be greater than or equal to Balance</errorMessage>
+</ValidationRule>

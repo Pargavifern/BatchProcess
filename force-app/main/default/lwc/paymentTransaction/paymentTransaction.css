@@ -1,0 +1,12 @@
+.medium {
+    min-height: 65px;
+}
+
+.slds-modal__container {
+    max-width: 70rem !important;
+    width: 90% !important;
+}
+
+.no-Border-Radius {
+    border-radius: 0! important;
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_refinanced_status_cannot_be_live</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (NOT(ISNEW()),ISPICKVAL(PRIORVALUE(Status__c),&quot;Refinanced&quot;), ISPICKVAL(Status__c,&quot;Live&quot;))</errorConditionFormula>
+    <errorMessage>Status cannot set to be &apos;Live&apos;</errorMessage>
+</ValidationRule>

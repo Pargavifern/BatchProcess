@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sum_of_Debits__c</fullName>
+    <externalId>false</externalId>
+    <label>Sum of Debits</label>
+    <summarizedField>Bank_Account_Transaction__c.Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>Bank_Account_Transaction__c.Transaction_Type__c</field>
+        <operation>equals</operation>
+        <value>Withdrawal, Fee</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Bank_Account_Transaction__c.Bank_Account__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

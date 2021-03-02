@@ -1,0 +1,100 @@
+<template>
+    <template if:true={createRecordOpen}>  
+        <template if:true={recordTypeSelector}>
+            <div >
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" 
+                class="slds-modal slds-fade-in-open" style="background: var(--lwc-colorBackgroundTempModalTint,rgba(8, 7, 7, 0.6))">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                                <lightning-button-icon icon-name="utility:close" variant="bare-inverse" size="large" onclick={closeModal}></lightning-button-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New {objLabelName}</h2>
+                        </header>
+                        <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                            <div class="slds-radio_faux slds-radio__label">
+                            <lightning-radio-group name="Record Type"
+                                                  label="Record Type"
+                                                  options={recordTypeOptions}
+                                                  value={recordTypeId}
+                                                  variant="label-inline"
+                                                  type="radio"
+                                                  onchange={handleRecTypeChange}>
+                            </lightning-radio-group>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" onclick={closeModal} class="slds-var-p-right_small"></lightning-button>
+                            <lightning-button label="Next" onclick={createRecordMain} variant="brand"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+            </div>
+        </template>
+        
+        <template if:true={mainRecord}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-2"
+             class="slds-modal slds-fade-in-open slds-modal_small" style="background: var(--lwc-colorBackgroundTempModalTint,rgba(8, 7, 7, 0.6))">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">New {objLabelName}</h2>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-var-p-around_large" style="overflow-y: auto;" id="modal-content-id-2">
+                        <div if:true={errorPresent}>
+                            <div class="slds-text-color_inverse slds-var-p-around_small customError" style="font-size: var(--lwc-fontSizeLarge,1rem);">
+                                Review the errors on this page.</div>
+                            <ul class="slds-text-color_error slds-var-p-around_small">
+                                <template for:each={errorMsg} for:item="item">
+                                    <li key={item} >{item} </li>
+                                </template>
+                            </ul>
+                            <hr class="slds-var-m-bottom_medium slds-var-m-top_small">
+                        </div>
+                        <div class="slds-var-p-left_large slds-var-p-right_large"> 
+                            <div if:true={fields}>
+                                <lightning-record-edit-form
+                                    object-api-name={objName}
+                                    record-type-id={recordTypeId}
+                                    form-class="slds-p-around_large"
+                                    density="comfy"
+                                    oncancel={closeModal}
+                                    onload={handleLoad}
+                                    onerror={handleError}
+                                    onsuccess={handleSuccess}>
+                                    <template for:each={fields} for:item="field">
+                                        <lightning-input-field field-name={field} required key={field}></lightning-input-field>
+                                    </template>
+                                    <div class="slds-modal__footer" style="position: relative; margin-left: -74px; margin-right: -74px; bottom: -46px;">
+                                        <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={closeModal}> </lightning-button>
+                                        <lightning-button variant="brand" class="slds-var-m-left_small" type="submit" label="Save"></lightning-button>
+                                    </div>
+                                </lightning-record-edit-form>  
+                            </div>
+                            <div if:false={fields}>
+                                <lightning-record-form
+                                object-api-name={objName}
+                                record-type-id={recordTypeId}
+                                layout-type="Full"
+                                columns="2"
+                                form-class="slds-p-around_large"
+                                density="comfy"
+                                oncancel={closeModal}
+                                onload={handleLoad}
+                                onerror={handleError}
+                                onsuccess={handleSuccess}>
+                            </lightning-record-form>  
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </template>
+    </template>
+ </template>

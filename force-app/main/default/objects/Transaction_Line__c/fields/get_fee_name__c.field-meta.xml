@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>get_fee_name__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL( Type__c  , &apos;Fee&apos;), &quot;Fee: &quot; &amp;Fee__r.Name ,
+IF( ISPICKVAL( Type__c , &apos;Interest&apos;) , TEXT(Type__c ) ,
+IF( ISPICKVAL( Type__c , &apos;Principal&apos;) , TEXT(Type__c ),
+IF( ISPICKVAL( Type__c , &apos;Interest Accrued&apos;) , TEXT(Type__c ),
+&apos;&apos;
+))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>get fee name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

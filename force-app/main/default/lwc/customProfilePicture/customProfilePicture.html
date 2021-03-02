@@ -1,0 +1,34 @@
+<template>    
+    <article class="slds-card" >
+        <div class="slds-is-expanded slds-align_absolute-center">
+            <img class="thumb slds-p-horizontal_small" src={imageSrc} onerror={setDefaultImage}/>           
+        </div>
+        <footer class="slds-card__footer nomargin">
+            <div class="slds-clearfix">
+                <div class="slds-float_left fileuploadMargin">
+                    <lightning-file-upload
+                        class="slds-form-element"
+                        name="fileUploader"
+                        accept={acceptedFormats}
+                        record-id={recordId}
+                        onuploadfinished={handleUploadFinished}>
+                    </lightning-file-upload>
+                </div>
+                <div class="slds-float_right">
+                   
+                        <lightning-button-icon
+                            class="slds-float_left"
+                            icon-name="utility:delete"
+                            variant="border-filled"
+                            alternative-text="Delete"
+                            slot="actions"
+                            onclick={deleteProfilePicture}
+                            disabled={disableDeleteicon} 
+                            >
+                        </lightning-button-icon>
+                    
+                </div>
+            </div>
+        </footer>
+    </article>
+</template>

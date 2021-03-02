@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Jobs_Created__c</fullName>
+    <externalId>false</externalId>
+    <label>Total Jobs Created</label>
+    <summarizedField>Application_Impact__c.Number_of_Jobs__c</summarizedField>
+    <summaryFilterItems>
+        <field>Application_Impact__c.Impact__c</field>
+        <operation>equals</operation>
+        <value>Created</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Application_Impact__c.Application__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

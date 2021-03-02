@@ -1,0 +1,12 @@
+<template>
+    <div class="flowruntimeInputWrapper uiBlock">
+        <label for="FieldSelect" class="slds-form-element__label slds-no-flex">
+            <abbr title="required" class="slds-required">*</abbr>Transaction Type
+        </label>
+        <select class="select uiInput uiInputSelect uiInput--default uiInput--select" name = "optionSelect" onchange={handleChange} >
+            <template for:each={options} for:item="data">
+                <option key={data.value} value={data.value}> {data.label} </option>
+            </template>
+        </select>
+    </div>
+</template>

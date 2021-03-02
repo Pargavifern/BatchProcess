@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>49.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="principalPaid" type="integer" role="outputOnly"/>
+            
+            <property name="interestPaid" type="integer" role="outputOnly"/>
+            
+            <property name="feePaid" type="integer" role="outputOnly"/>
+            
+            <property name="principalBalance" type="integer" role="inputOnly"/>
+            
+            <property name="interestBalance" type="integer" role="inputOnly"/>
+            
+            <property name="feeBalance" type="integer" role="inputOnly"/>
+            
+            <property name="balance" type="integer" role="inputOnly"/>
+            
+            <property name="interestCharged" type="integer" role="outputOnly"/>
+            
+            <property name="creditLimit" type="integer" role="inputOnly"/>
+            
+            <property name="rate" type="integer" role="inputOnly"/>
+            
+            <property name="transactionDate" type="DateTime" role="outputOnly"/>
+            
+            <property name="lastPaymentDate" type="DateTime" role="inputOnly"/>
+            
+            <property name="comments" type="string" role="outputOnly"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

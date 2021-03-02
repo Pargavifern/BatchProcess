@@ -1,0 +1,47 @@
+<aura:component controller="RecordTypeController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" >
+	 <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordValue" type="String" default="Line of Credit"/>
+     
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Line of Credit', 'value': 'Line of Credit'},                                         
+    {'label': 'Grant', 'value': 'Grant'},
+    {'label': 'Loan', 'value': 'Loan'},
+    ]"/>
+    <aura:attribute name="value" type="String" default="Line of Credit"/>
+    <div class="whole">
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+          <h2 class="slds-text-heading--medium">New Application </h2>
+     </div>
+        <div class="aligncontent slds-p-around_medium">
+            <lightning:radioGroup 
+        aura:id="mygroup"
+        name="recordTypeApplication"
+        options="{! v.options }"
+        value="{! v.value }"
+        onchange="{! c.handleChange }" />
+        </div>
+    
+     <footer class="slds-modal__footer alignFooter">
+         <lightning:button  label="Cancel" onclick="{!c.cancelForm}" />
+          <lightning:button variant="brand" label="Next" onclick="{!c.NextPage}" />       
+    </footer>
+     </div>
+    <aura:html tag="style">
+        <!-- this is used to place the footer at the bottom of the page in quick action. -->
+        <!--Because qucik action defaultly uses the header and the footer. To override to add the custom-->
+        <!--buttom requires this style-->  
+		.aligncontent{
+        	padding-left:5%;
+        }
+       .alignFooter{
+            position: relative;
+            bottom: -1.1rem;
+        }
+        .whole{
+            width: 111%;
+            position: relative;
+            margin-left: -5.5%;
+            bottom: -0.2rem;
+        }
+    </aura:html>
+</aura:component>

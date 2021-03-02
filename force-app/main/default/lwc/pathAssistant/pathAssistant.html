@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-card slds-card_boundary slds-var-p-around_small">
+        <div class="slds-path">
+          <div class="slds-grid slds-path__track">
+            <div class="slds-grid slds-path__scroller-container">
+              <div class="slds-path__scroller" role="application">
+                <div class="slds-path__scroller_inner">
+                    <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+                        <template for:each={objectPicklist} for:item="steps" for:index="index">
+                            <li class={steps.classStyle} role="presentation" key={steps.Stages}>
+                                <a data-value={steps.Stages} aria-selected="false" onclick={changePicklist} class="slds-path__link" style="z-index:1;" href="javascript:void(0);" role="option" tabindex="-1">
+                                    <span class="slds-path__stage">
+                                        <lightning-icon icon-name="utility:check" variant="inverse" size="xx-small"></lightning-icon>
+                                        </span>
+                                    <span class="slds-path__title">{steps.pathLabel}</span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            <div if:true={showButton} class="slds-grid slds-path__action">
+                <lightning-button label="Mark Status as Complete" title="Mark Status as Complete" variant="brand" icon-name="utility:check"
+                            onclick={getupdatingValue} disabled={disableButton}></lightning-button>
+        
+            </div>
+        </div>
+      </div>
+    </div>
+</template>

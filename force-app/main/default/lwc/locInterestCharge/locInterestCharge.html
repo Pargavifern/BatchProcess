@@ -1,0 +1,39 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Interest Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={interestBalance}
+                                format-style="currency"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Payment Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={principalBalance}
+                                format-style="currency"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input required type="date" label="Transaction Date" min={_lastChargedDate} value={_transactionDate} onchange={transactionDateChange} >
+                </lightning-input>
+              </div>
+              <div class="slds-col slds-size_1-of-2">
+                <lightning-input required  label="Charged Interest Amount" value={_interestAmount} disabled={_disabled} ></lightning-input>
+            </div> 
+            <div class="slds-col slds-size_1-of-1">
+                 <lightning-textarea name="input7"  value={_comments} label="Comments" onchange={handleComment}></lightning-textarea>
+            </div>
+
+            </div>   
+      </lightning-card>
+</template>

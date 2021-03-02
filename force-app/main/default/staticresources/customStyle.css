@@ -1,0 +1,6 @@
+.myCustomCls{
+    background-color: rgb(227,242,253) !important;
+}
+.myCustomCls:hover{
+    background-color: rgb(227,242,253) !important;
+}

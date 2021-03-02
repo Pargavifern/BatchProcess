@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                    <template if:true={iconColorSet}>
+                        <lightning-icon icon-name={iconName} class="my-icon" size="small" alternative-text="Connected">
+                        </lightning-icon>  
+                    </template>
+                    <template if:false={iconColorSet}>
+                        <lightning-icon icon-name={iconName} size="small" alternative-text="Connected">
+                        </lightning-icon>  
+                    </template> 
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> {headerName} </b> </h2>
+                </div>
+            </header>
+        </div>
+ 
+        <div class="slds-media__body slds-var-p-around_medium">
+             <lightning-record-form
+                columns="2"
+                mode="view"
+                density="comfy"
+                record-id={recordId}
+                object-api-name={objectApiName}
+                fields={fieldList}>
+             </lightning-record-form>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>49.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <masterLabel>Suspend Interest </masterLabel>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="lastTransactionDate" label="Last Transaction Date" role="inputOnly" type="DateTime"/>
+            
+            <property name="accruedDate" label="Accured Date" role="inputOnly" type="DateTime"/>
+            
+            <property name="balance" label="Balance" role="inputOnly" type="integer"/>
+            
+            <property name="principalBalance" label="Principal Balance" role="inputOnly" type="integer"/>
+            
+            <property name="interestBalance" label="Interest Balance" role="inputOnly" type="integer"/>
+            
+            <property name="suspenseType" label="Suspense Type" type="string"/>
+            
+            <property name="comments" label="Comments" role="outputOnly" type="string"/>
+            
+            <property name="startDate" label="Start Date" type="DateTime"/>
+            
+            <property name="endDate" label="End Date" type="DateTime"/>
+            
+            <property name="InterestFrequency" label="Interest Frequency" type="string" role="inputOnly"/>
+            
+            <property name="paymentFrequency" label="Payment Frequency" type="string" role="inputOnly"/>
+            
+            <property name="interestCalculation" label="Interest Calculation Method" type="string" role="inputOnly"/>
+            
+            <property name="dayCount" label="Day Count" type="string" role="inputOnly"/>
+            
+            <property name="rate" label="Rate" type="string" role="inputOnly"/>
+            
+            <property name="interestCharge" label="Interest Charge" role="outputOnly" type="integer"/>
+            
+            <property name="closingInterest" label="Closing Interest" role="outputOnly" type="integer"/>
+            
+            <property name="accruedInterest" label="Accrued Interest" role="outputOnly" type="integer"/>
+            
+            <property name="endSuspension" type="boolean"/>
+            
+            <property name="activeRecord" label="Suspended Record" role="inputOnly" type="boolean"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

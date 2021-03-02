@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Batch_Processing_Apex</name>
+        <label>Batch Processing Apex</label>
+        <locationX>446</locationX>
+        <locationY>238</locationY>
+        <actionName>BatchProcess</actionName>
+        <actionType>apex</actionType>
+    </actionCalls>
+    <apiVersion>51.0</apiVersion>
+    <interviewLabel>Batch Processing {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Batch Processing</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Batch_Processing</name>
+        <label>Batch Processing</label>
+        <locationX>239</locationX>
+        <locationY>230</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>BatchLwc</name>
+            <extensionName>c:batchForm</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>114</locationX>
+        <locationY>61</locationY>
+        <connector>
+            <targetReference>Batch_Processing</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+</Flow>

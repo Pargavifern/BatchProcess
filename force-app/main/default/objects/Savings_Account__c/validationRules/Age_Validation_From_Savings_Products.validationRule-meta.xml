@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Age_Validation_From_Savings_Products</fullName>
+    <active>true</active>
+    <errorConditionFormula>Contact__r.Age__c &gt;  Savings_Product__r.Maximum_Age__c  ||  Contact__r.Age__c  &lt;  Savings_Product__r.Minimum_Age__c</errorConditionFormula>
+    <errorMessage>Age should be in the range which is given in the savings products.</errorMessage>
+</ValidationRule>

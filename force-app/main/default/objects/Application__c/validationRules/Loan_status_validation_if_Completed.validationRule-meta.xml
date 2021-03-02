@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_status_validation_if_Completed</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(NOT(ISNEW()) &amp;&amp; ISPICKVAL(PRIORVALUE(Status__c),&quot;Complete&quot;) , 
+  IF( CONTAINS( RecordType.Name ,&apos;Loan&apos;)&amp;&amp; PRIORVALUE(Loan__c ) == 
+     NULL ,
+      false , 
+     true )  ,
+ false
+)</errorConditionFormula>
+    <errorMessage>Completed application can not be changed</errorMessage>
+</ValidationRule>

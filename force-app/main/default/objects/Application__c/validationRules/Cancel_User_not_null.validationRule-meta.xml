@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cancel_User_not_null</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Completion_Status__c, &quot;Canceled&quot;) &amp;&amp; Cancel_user__c == &quot;&quot;</errorConditionFormula>
+    <errorDisplayField>Cancel_user__c</errorDisplayField>
+    <errorMessage>Please choose the value for cancel user</errorMessage>
+</ValidationRule>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>48.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="pause" type="string"/>
+            
+            <property name="next" label="Next/Finish" type="string"/>
+            
+            <property name="previous" type="string"/>
+            
+            <property name="showPause" type="boolean"/>
+            
+            <property name="showPrevious" type="boolean"/>
+            
+            <property name="showNext" label="Show Next/Finish" type="boolean"/>
+            
+            <property name="customButton1" label="Custom Button1" type="string"/>
+            
+            <property name="showCustomButton1" label="Show Custom Button1" type="boolean"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

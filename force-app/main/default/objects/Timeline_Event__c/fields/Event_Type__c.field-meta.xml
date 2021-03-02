@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Event Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Applied for Loan</fullName>
+                <default>false</default>
+                <label>Applied for Loan</label>
+            </value>
+            <value>
+                <fullName>Cancelled Loan Application</fullName>
+                <default>false</default>
+                <label>Cancelled Loan Application</label>
+            </value>
+            <value>
+                <fullName>Loan Application Denied</fullName>
+                <default>false</default>
+                <label>Loan Application Denied</label>
+            </value>
+            <value>
+                <fullName>Received Loan</fullName>
+                <default>false</default>
+                <label>Received Loan</label>
+            </value>
+            <value>
+                <fullName>Paid off Loan</fullName>
+                <default>false</default>
+                <label>Paid off Loan</label>
+            </value>
+            <value>
+                <fullName>Opened Bank Account</fullName>
+                <default>false</default>
+                <label>Opened Bank Account</label>
+            </value>
+            <value>
+                <fullName>Closed Bank Account</fullName>
+                <default>false</default>
+                <label>Closed Bank Account</label>
+            </value>
+            <value>
+                <fullName>Started Employment</fullName>
+                <default>false</default>
+                <label>Started Employment</label>
+            </value>
+            <value>
+                <fullName>Ended Employment</fullName>
+                <default>false</default>
+                <label>Ended Employment</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

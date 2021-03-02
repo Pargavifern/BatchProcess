@@ -1,0 +1,292 @@
+<template>
+    <lightning-card>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-3 slds-p-right_xx-small slds-tabs_card">
+            <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:shift_type" alternative-text="Event"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-card__header-title ">
+                        Finances
+                    </h1>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_small">
+                    <div class="slds-text-body_regular slds-text-color_weak">Loan applications are subject to approval. The amount requested may be changed during this process.</div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <c-look-up obj-name="Loan_Product__c" icon-name="custom:custom45" required unique-key='Loan_in_flow'
+                        label-name="Loan Product" onvalueselect={LoanProductChanged} create-record=true> </c-look-up>
+                        <div if:true={fpRequired} class="slds-text-color_error" >Please choose the Loan Product</div>
+                </div>
+                <!-- <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-combobox name="combobox-loan_product" label="Interest Product" class="inp" placeholder="--None--"
+                        required="" value={selectedInterestProductValue} options={interestProductOptions}
+                        onchange={interestProductChanged}>
+                    </lightning-combobox>
+                </div> -->
+                
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="amt" name="input-amount" label="Amount" type="number" value={amount}
+                        formatter="currency" required="" min={minAmount} max={maxAmount} step=".01"
+                        onchange={amountChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-combobox name="repaymentFrequency" label="Repayment Frequency"
+                        value={selectedRepaymentFrquency} options={repaymentOptions}
+                        onchange={handleRepaymentFrequencyChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="term" name="input-term" label="Term (months)" type="number" value={selectedTerm}
+                         required="" min={minTerm} max={maxTerm} step="1"
+                        onchange={termChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class=rt name="input-rate" disabled={disableRate} min={minRate} max={maxRate}  label={rateLabel} type="number" value={selectedRate}
+                        formatter="number" required="" step="0.001"
+                        onchange={rateInputChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="disbersaldt"  type="date" name="disbersalDate" label="Disbursal Date"  value={disbursalDate}
+                    onchange={disbursalDateChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="dt"  type="date" name="input-date" label="Initial Payment Date"  value={initialpaymentdate}
+                    onchange={dateInputChange}></lightning-input>
+                </div>
+
+            </div>
+        </div>
+            <div class="slds-card__body slds-card__body_inner" if:true={advanced}>
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input class="loon" name="balloon-amount" label="Balloon Amount" type="number" value={balloonAmount}
+                        formatter="currency" required="" min="0" max={amount} step="1.00"
+                        onchange={balloonAmountChanged}>
+                    </lightning-input>
+                </div> 
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input name="periods-deferred-with-grace" label="Periods Deferred with Grace" type="number" value={periodsDeferredWithGrace}
+                        formatter="number" required="" min="0" max={maxTerm} step="1.00"
+                        onchange={periodsDeferredWithGraceChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input   name="seasonal-payments" label="Seasonal Periods without Payment" type="text" value={seasonalPeriods}
+                        onblur={handleCustomValidationSeasonalPayments}
+                        onchange={seasonalPeriodsChanged} class="inputSeasonalPeriods">
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input class="sea" name="seasonal-payment-amount" label="Seasonal Payment Amount" type="number" value={seasonalPaymentAmount}
+                        formatter="currency" required="" min="0" max={amount} step="1.00"
+                        onchange={seasonalPaymentAmountChanged}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small">
+                    <label class="slds-form-element__label slds-no-flex" for="seasonal-interest-check">Pay Seasonal Interest</label>
+                    <lightning-input name="seasonal-interest-check" type="checkbox" class="seasonal-interest-checkbox"
+                        onchange={seasonalInterestChanged}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_x-small" if:false={annualRepaymentFrequency}>
+                    <label class="slds-form-element__label slds-no-flex" for="seasonal-repeat-check">Repeat Seasonal Periods</label>
+                    <lightning-input name="seasonal-repeat-check" type="checkbox"  class="seasonal-repeat-checkbox"
+                        onchange={seasonalRepeatChanged}>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+        <footer class="slds-card__footer">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                    <div class="slds-float_left">
+                        <lightning-button label={AdvancedLabel} title="Advanced" variant="Base"
+                            class="slds-m-left_x-small" onclick={advancedClicked}></lightning-button>
+                    </div>
+                    <div class="slds-float_right">
+                        <lightning-button label="Calculate" title="Calculate" variant="brand"
+                            class="slds-m-left_x-small" onclick={recalculateClicked}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </footer>
+            </article>
+        </div>
+        <div class="slds-col slds-size_2-of-3 slds-p-left_xx-small">
+            <article class="slds-card">
+                <div class="slds-tabs_default slds-tabs_medium slds-tabs_card">
+                    <lightning-tabset>
+                        <lightning-tab label="Details">
+                            <div if:false={isCalculated} class="slds-grid slds-wrap slds-gutters alignElements">
+                                <div class="slds-col slds-size_1-of-1">
+                                
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="slds-p-around_x-large slds-align_absolute-center"> 
+        
+                                        <img src={placeimage} style="height: 14.1rem;" width="100%" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div if:true={isCalculated} class="slds-grid slds-wrap slds-gutters alignElements">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">{repaymentLabel}</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-number value={numLoanRepaymentFormatted}
+                                                    format-style="currency"></lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Loan Product</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">{selectedLoanProductName}
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class=" slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Final Interest Rate</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-number value={finalRate} format-style="percent"
+                                                    maximum-fraction-digits="3"></lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Number of Payments</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">{remainingPayments}</div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Estimated Date Paid Off</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-date-time value={datePayedOff} year="numeric" month="short"
+                                                    day="numeric"></lightning-formatted-date-time>
+        
+                                            </div>
+        
+                                        </div>
+                                    </div>
+        
+                                </div>
+        
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="slds-form-element_readonly   slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Amount</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-number value={amount} format-style="currency">
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Total to be Repaid</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-number value={totalRepaidFormatted} format-style="currency">
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" slds-form-element_readonly  slds-p-horizontal_x-small">
+                                        <span class="slds-form-element__label">Total Interest</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-number value={totalInterestFormatted} format-style="currency">
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element_readonly  slds-p-horizontal_x-small ">
+                                        <span class="slds-form-element__label">Term (months)</span>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">{selectedTerm}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div  class="slds-col slds-size_1-of-1">
+                                    <br><br>
+                                    <div class="slds-text-heading_small">{chartTitleLabel}</div>
+                                    <c-loan-calculator-chart chartprincipal={chartprincipal} charttempinterest={charttempInterest} chartremainingtotalbalance={chartremainingTotalBalance} x-axis={xAxis} repayment-label={repaymentLabel}></c-loan-calculator-chart>
+                                </div>
+                           </div>
+                        </lightning-tab>
+                        <lightning-tab label="Schedule">
+                            <div class="slds-grid slds-wrap">
+                                <div if:true={isCalculated} class="slds-col slds-size--1-of-1">
+                                    <lightning-datatable key-field="id" data={loanScheduleFormattedWTotals} columns={columns} 
+                                        hide-checkbox-column 
+                                        onrowaction={handleRowAction}
+                                        min-column-width="20"
+                                        >
+                                    </lightning-datatable>
+                                    <!-- <div class="slds-p-around_medium lgc-bg-inverse slds-float_right">
+                                        <lightning-button-group>
+                                            <lightning-button label="Download" icon-name="utility:download"
+                                                onclick={downloadCSVFile}>
+                                            </lightning-button>
+                                            <lightning-button-menu alternative-text="Show menu" menu-alignment="right" class="down-menu">
+                                                <lightning-menu-item label=".CSV" value="item1" onclick={downloadCSVFile}
+                                                    icon-name="doctype:csv"></lightning-menu-item>
+                                                <lightning-menu-item label=".PDF" value="item2"  icon-name="doctype:pdf"></lightning-menu-item>
+                                            </lightning-button-menu>
+                                        </lightning-button-group>
+                                    </div> -->
+        
+                                </div>
+                                <div if:false={isCalculated} class="slds-grid slds-wrap slds-gutters alignElements">
+                                    <div class="slds-col slds-size_1-of-1">
+                                     
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-p-around_x-large slds-align_absolute-center"> 
+        
+                                        <img src={placeimage} style="height: 14.1rem;" width="100%" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-tab>
+                    </lightning-tabset>
+        
+        
+        
+        
+        
+                </div>
+            </article>
+        </div>
+    </div>
+    </lightning-card>
+
+    <footer class="slds-modal__footer" style="bottom: -27px; position: relative; margin-left:-31px; margin-right:-31px;">
+        
+        <div class="slds-clearfix">
+            <div class="slds-float_right">
+                <lightning-button  label="Apply" class="slds-m-left_x-small" variant="brand" onclick={handleApply}> </lightning-button>
+            </div>
+        </div>
+        
+    </footer>
+    <c-new-record-lookup obj-name="Loan_Product__c" unique-key='Loan_in_flow'></c-new-record-lookup> 
+</template>

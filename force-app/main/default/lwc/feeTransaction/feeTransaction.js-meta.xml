@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>48.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="feeBalance" type="string"/>
+            
+            <property name="transactionDate" type="DateTime"/>
+            
+            <property name="Ctype" type="string"/>
+            
+            <property name="ChargeType" type="string"/>
+            
+            <property name="Amount__c" type="string"/>
+            
+            <property name="loanAmount" type="string"/>
+            
+            <property name="feeId" type="string"/>
+            
+            <property name="lastTransactionDate" type="Date"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

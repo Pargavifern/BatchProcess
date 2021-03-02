@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>49.0</apiVersion>
+    
+    <masterLabel> Transaction Dropdown </masterLabel>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="transactionType" label="Transaction Type" role="outputOnly" type="string"/>
+            
+            <property name="loanStatus" label="Loan Status" role="inputOnly" type="string"/>
+            
+            <property name="enabledFilter" label="Enable Filter" role="inputOnly" type="boolean"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

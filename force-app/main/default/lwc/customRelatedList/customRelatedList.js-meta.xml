@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>50.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="objectApiName" type="string"/>
+            
+            <property name="fields" type="string"/>
+            
+            <property name="rowlabels" type="string"/>
+            
+            <property name="filterId" type="string"/>
+            
+            <property name="filterApiName" type="string"/>
+            
+            <property name="title" type="string"/>
+            
+            <property name="icon" type="string"/>
+            
+            <property name="fieldTypes" type="string"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

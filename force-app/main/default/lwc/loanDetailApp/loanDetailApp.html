@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom87" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> Loan </b> </h2>
+                </div>
+            </header>
+        </div>
+       <div class="slds-media__body">
+            <div class="slds-p-left_medium">
+                <lightning-record-view-form record-id={loanId} object-api-name="Loan__c">
+                    <div class="slds-grid slds-wrap slds-gutters slds-var-p-bottom_medium">
+                        <div class="slds-col slds-size_1-of-2 ">
+                            <span class="slds-form-element__label">Number</span>
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-formatted-url value={loanLink} tooltip="loan" label={loanNumber}></lightning-formatted-url>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 ">
+                            <lightning-output-field field-name="Status__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 ">
+                            <lightning-output-field field-name="Amount__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 ">
+                            <lightning-output-field field-name="Balance__c">
+                            </lightning-output-field>
+                        </div>
+                    </div>
+                 </lightning-record-view-form>
+            </div>
+        </div>
+    </div>
+</template>

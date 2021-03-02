@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>49.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="lastTransactionDate" label="Last Transaction Date" role="inputOnly" type="DateTime"/>
+            
+            <property name="balance" label="Balance" role="inputOnly" type="integer"/>
+            
+            <property name="principalBalance" label="Balance Principal" role="inputOnly" type="integer"/>
+            
+            <property name="feeBalance" label="Balance Fee" role="inputOnly" type="integer"/>
+            
+            <property name="interestBalance" label="Interest Balance" role="inputOnly" type="integer"/>
+            
+            <property name="transactionType" label="Transaction Type" type="string"/>
+            
+            <property name="writeoffType" label="Writeoff Type" role="outputOnly" type="string"/>
+            
+            <property name="writeoffAmount" label="Writeoff Amount" role="outputOnly" type="integer"/>
+            
+            <property name="comments" label="Comments" role="outputOnly" type="string"/>
+            
+            <property name="transactionDate" label="Transaction Date" type="DateTime"/>
+            
+            <property name="InterestFrequency" label="Interest Frequency" type="string" role="inputOnly"/>
+            
+            <property name="paymentFrequency" label="Payment Frequency" type="string" role="inputOnly"/>
+            
+            <property name="interestCalculation" label="Interest Calculation Method" type="string" role="inputOnly"/>
+            
+            <property name="dayCount" label="Day Count" type="string" role="inputOnly"/>
+            
+            <property name="rate" label="Rate" type="string" role="inputOnly"/>
+            
+            <property name="interestCharge" label="Interest Charge" role="outputOnly" type="integer"/>
+            
+            <property name="Principal" label="Principal" role="outputOnly" type="integer"/>
+            
+            <property name="Interest" label="Interest" role="outputOnly" type="integer"/>
+            
+            <property name="Fee" label="Fee" role="outputOnly" type="integer"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

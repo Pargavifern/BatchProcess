@@ -1,0 +1,18 @@
+.thumb {
+    height: 300px;
+    transition: height 400ms linear;
+    padding-top: 11px;
+    padding-bottom: 11px
+}
+
+.fileuploadMargin {
+    margin-top: -21px;
+}
+
+.slds-card__header {
+    padding: 0px;
+}
+
+.nomargin {
+    margin: 0px;
+}

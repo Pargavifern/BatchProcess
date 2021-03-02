@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_must_be_different</fullName>
+    <active>true</active>
+    <errorConditionFormula>Contact__c ==  Related_Contact__c</errorConditionFormula>
+    <errorDisplayField>Related_Contact__c</errorDisplayField>
+    <errorMessage>Related contact must not be same to contact. Choose another contact</errorMessage>
+</ValidationRule>

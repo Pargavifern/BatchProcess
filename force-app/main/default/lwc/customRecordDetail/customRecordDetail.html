@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="standard:task2" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> Checklist </b> </h2>
+                </div>
+            </header>
+        </div>
+       
+                <div class="slds-media__body">
+                    <div class="slds-p-left_medium">
+                    <lightning-record-form
+                    record-id={recordId}
+                    object-api-name={objectApiName}
+                    mode={mode}
+                    columns={column}
+                    fields={fieldArray}>
+                    </lightning-record-form>
+                </div>
+                </div>
+  </div>
+</template>

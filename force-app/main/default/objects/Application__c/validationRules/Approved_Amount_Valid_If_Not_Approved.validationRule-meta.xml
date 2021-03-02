@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approved_Amount_Valid_If_Not_Approved</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( NOT(ISBLANK(Approved_Amount__c)), NOT( ISPICKVAL(Completion_Status__c ,&quot;Approved&quot; )))</errorConditionFormula>
+    <errorMessage>Approved Amount can only be changed by approving the application</errorMessage>
+</ValidationRule>

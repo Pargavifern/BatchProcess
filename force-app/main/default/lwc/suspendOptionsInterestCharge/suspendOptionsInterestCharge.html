@@ -1,0 +1,74 @@
+<template>
+  <div class="slds-form" role="list">
+    <div class="slds-form__row">
+      <div class="slds-form-element slds-form-element_stacked">
+        <b> Transaction Date : </b> &nbsp;<lightning-formatted-date-time value={_transactionDate}>
+        </lightning-formatted-date-time>
+      </div>
+      <div class="slds-form-element slds-form-element_stacked">
+        <b> Charged Interest Amount : </b> &nbsp; <lightning-formatted-number value={chargeAmountOriginal}
+          format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+      </div>
+      <div class="slds-form-element slds-form-element_horizontal">
+        You have a picked a Charge Transaction Date which is past the current Interest Suspension End Date. In order to proceed with
+        the Charge, please proceed with one of the options below:
+      </div>
+    </div>
+  </div>
+  <!-- <div class="slds-form__row">
+    <div class="slds-form__item">
+      <b> Transaction Date : </b> &nbsp;<lightning-formatted-date-time value={_transactionDate}>
+      </lightning-formatted-date-time>
+    </div>
+    <div class="slds-form__item">
+      <b> Charged Interest Amount : </b> &nbsp; <lightning-formatted-number value={chargeAmountOriginal}
+        format-style="currency" maximum-fraction-digits="2"></lightning-formatted-number>
+    </div>
+  </div> -->
+
+  <div class="slds-var-p-around_x-small">
+    <div class="c-container ">
+      <lightning-layout vertical-align="stretch" horizontal-align="center" multiple-rows="true" class="medium">
+        <lightning-layout-item flexibility="auto" size="5"
+          class="slds-border_top slds-border_left slds-border_bottom slds-border_right slds-var-m-right_small">
+          <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold">
+            Option 1 (Extend Suspension)
+          </div>
+          <lightning-card>
+            <div class="slds-var-p-horizontal_small">
+              Please select a new Interest Suspense End Date which is greater than <lightning-formatted-date-time
+                value={_transactionDate}></lightning-formatted-date-time>. <br>
+                <abbr if:true={extendSuspend} title="required" class="slds-required">*</abbr>New End Date
+              <lightning-input type="date" class="endDateInput" label="New End Date" variant="label-hidden" 
+               value={newEndDate} disabled={endSuspend} onchange={transactionDateChange}> 
+              </lightning-input>
+              
+            </div>
+            <div slot="footer" class="slds-align_absolute-center">
+              <lightning-input checked={extendSuspend} type="toggle"
+                onchange={handleToggle1}></lightning-input>
+            </div>
+          </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto" size="5"
+          class="slds-border_top slds-border_left slds-border_bottom slds-border_right slds-var-m-left_small">
+          <div class="slds-page-header slds-align_absolute-center no-Border-Radius slds-text-title_bold">
+            Option 2 (End Suspension)
+          </div>
+          <lightning-card>
+            <div class="slds-var-p-horizontal_small">
+              Interest will be charged up to the <lightning-formatted-date-time value={_transactionDate}>
+              </lightning-formatted-date-time> and added to the Accrued Suspense.
+              This will end the current Interest Suspense period. You will then be able to freely add interest charges
+              up to any date.
+            </div>
+            <div slot="footer" class="slds-align_absolute-center">
+              <lightning-input  checked={endSuspend} type="toggle" onchange={handleToggle2}>
+              </lightning-input>
+            </div>
+          </lightning-card>
+        </lightning-layout-item>
+      </lightning-layout>
+    </div>
+  </div>
+</template>

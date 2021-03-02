@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Rate_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>Minimum_Rate__c &lt;0</errorConditionFormula>
+    <errorDisplayField>Minimum_Rate__c</errorDisplayField>
+    <errorMessage>Minimum Rate must be positive</errorMessage>
+</ValidationRule>

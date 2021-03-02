@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Risk_Level__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Total_Risk_Score__c &lt; 150 , &apos;Very Low&apos;,
+IF( AND(Total_Risk_Score__c  &gt;= 150, Total_Risk_Score__c &lt; 224) , &apos;Low&apos;,
+IF( AND(Total_Risk_Score__c  &gt;= 224, Total_Risk_Score__c &lt; 324), &apos;Medium&apos;,
+IF( AND(Total_Risk_Score__c  &gt;= 324, Total_Risk_Score__c &lt; 449), &apos;High&apos;,
+IF( Total_Risk_Score__c  &gt;= 449, &apos;Very HIgh&apos;,&apos;&apos;)))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Risk Level</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

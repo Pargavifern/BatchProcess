@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Payment</fullName>
+        <default>true</default>
+        <label>Payment</label>
+    </customValue>
+    <customValue>
+        <fullName>Disbursal</fullName>
+        <default>false</default>
+        <label>Disbursal</label>
+    </customValue>
+    <customValue>
+        <fullName>Charge</fullName>
+        <default>false</default>
+        <label>Charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer</fullName>
+        <default>false</default>
+        <label>Transfer</label>
+    </customValue>
+    <customValue>
+        <fullName>Adjustment</fullName>
+        <default>false</default>
+        <label>Adjustment</label>
+    </customValue>
+    <customValue>
+        <fullName>Reversal</fullName>
+        <default>false</default>
+        <label>Reversal</label>
+    </customValue>
+    <customValue>
+        <fullName>Recovery</fullName>
+        <default>false</default>
+        <label>Recovery</label>
+    </customValue>
+    <customValue>
+        <fullName>Capitalisation</fullName>
+        <default>false</default>
+        <label>Capitalisation</label>
+    </customValue>
+    <customValue>
+        <fullName>Write Off</fullName>
+        <default>false</default>
+        <label>Write Off</label>
+    </customValue>
+    <masterLabel>Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

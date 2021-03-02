@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Birthdate_Null</fullName>
+    <active>false</active>
+    <errorConditionFormula>ISNULL( Birthdate )</errorConditionFormula>
+    <errorDisplayField>Birthdate</errorDisplayField>
+    <errorMessage>Birthdate should be filled in</errorMessage>
+</ValidationRule>

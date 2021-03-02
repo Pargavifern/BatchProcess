@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Initiated_loan_status_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (ISNEW(), NOT( ISPICKVAL( Status__c , &quot;New&quot;)))</errorConditionFormula>
+    <errorMessage>New applications must have their status set to &apos;New&apos;</errorMessage>
+</ValidationRule>

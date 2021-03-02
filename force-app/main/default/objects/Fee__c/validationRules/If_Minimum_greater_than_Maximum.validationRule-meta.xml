@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_Minimum_greater_than_Maximum</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Variable&apos;,
+NOT(ISBLANK(Default_Amount__c)),
+Maximum__c &lt; Minimum__c
+)</errorConditionFormula>
+    <errorMessage>Maximum should be greater than minimum</errorMessage>
+</ValidationRule>

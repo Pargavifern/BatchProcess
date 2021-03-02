@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Collateral_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Collateral_Type__c</fields>
+    <fields>Issue_Date__c</fields>
+    <fields>Amount__c</fields>
+    <label>Collateral Compact</label>
+</CompactLayout>

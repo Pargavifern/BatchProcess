@@ -1,0 +1,42 @@
+<apex:component >
+    <apex:attribute name="title" description="Titile of the document"
+        type="String" required="true"/>
+        <apex:attribute name="disclaimer" description="Disclaimer text"
+        type="String"/>
+        <apex:attribute name="showPageNo" description="Showing page number"
+        type="String"/>
+    <div class="header Arial">
+
+
+        <div style="fullWidth">
+            <div style="float:right;width:38%;text-align:right">
+                <apex:image id="logo1" style="float:right" url="{!$Resource.Baytree_Logo}" width="60" height="35" /> <br />
+                <h4>{!title}</h4>
+            </div>
+            <!-- <div style="float:left;;width:32%;margin-top:17px">
+                <b>PROMISSORY NOTE</b>
+            </div> -->
+            <div style="float:right;;width:62%;text-align:left;font-size: 11pt">
+                <b style="font-size: 14pt;font-style: italic;"><apex:outputText value="{!$Organization.Name}" /></b>
+                <br />
+                <apex:outputText value="{!$Organization.Street}" />
+                <br />
+                <apex:outputText value="{!$Organization.State}" />
+                <br />
+                <apex:outputText value="{!$Organization.City}" />
+                <br />
+                <apex:outputText value="{!$Organization.Country}" />
+                <br />
+                <apex:outputText value="{!$Organization.PostalCode}" />
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div style="display:{!if(ISNULL(showPageNo),'none','block')};float:right"><span class="pagenumber"/> of <span class="pagecount"/></div>
+        <p style="font-size:7pt; display:{!if(disclaimer = '','none','')}">
+            {!disclaimer}
+        </p>
+    </div>
+</apex:component>

@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+    <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure"> 
+           <lightning-icon icon-name="action:map" alternative-text="Map" title="Map" size="x-small" ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                    <span>Billing Address</span> </a>
+                    
+                </h2>
+            </div>
+            
+        </header>
+        
+        </div>
+        <div if:true={noAddress}>
+       <div class="slds-align_absolute-center slds-card__header-title slds-text-title_bold" style="height:4rem">{message}</div>
+      <img class="thumb slds-p-horizontal_small slds-p-around_xx-large" src={imageSrc}/></div></div>
+    <div if:false={noAddress}>
+        <lightning-map class="slds-grid" zoom-level={zoomLevel} map-markers={mapMarkers}></lightning-map>   
+    </div>
+</template>

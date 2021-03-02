@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maximum_and_Minimum_Term_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>Maximum_Term__c  &lt;=  Minimum_Term__c</errorConditionFormula>
+    <errorDisplayField>Maximum_Term__c</errorDisplayField>
+    <errorMessage>Maximum Term must be greater than the Minimum Term</errorMessage>
+</ValidationRule>

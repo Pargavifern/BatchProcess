@@ -1,0 +1,64 @@
+<template>
+    <div if:true={application}>
+        <lightning-record-view-form record-id={objectId} object-api-name={objectName}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_small">
+                    <lightning-output-field field-name="Amount__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_small">
+                    <lightning-output-field field-name="Reason__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+        </lightning-record-view-form>
+    </div>
+    <div if:true={employment}>
+        <lightning-record-view-form record-id={objectId} object-api-name={objectName}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-output-field field-name="Start_Date__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-output-field field-name="End_Date__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-output-field field-name="Monthly_Income__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+        </lightning-record-view-form>
+    </div>
+    <div if:true={trans}>
+        <lightning-record-view-form record-id={objectId} object-api-name={objectName}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-output-field field-name="Type__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-output-field field-name="Total_Debit__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+               </lightning-record-view-form>
+    </div>
+
+    <div if:false={trans}>
+        <lightning-record-view-form record-id={objectId} object-api-name={objectName}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_small">
+                    <lightning-output-field field-name="Type__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-bottom_small">
+                    <lightning-output-field field-name="Total_Credit__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+        </lightning-record-view-form>
+    </div>
+
+</template>

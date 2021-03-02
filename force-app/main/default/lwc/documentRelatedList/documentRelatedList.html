@@ -1,0 +1,131 @@
+<template>
+    <template if:true={loanRecord}>
+        <div class="slds-card slds-card_boundary">
+            <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure"> 
+                         <lightning-icon icon-name="action:add_file" size="xx-small" alternative-text="Connected">
+                        </lightning-icon>     
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title"> <b> Summary </b> </h2>
+                    </div>
+                </header>
+            </div>
+     
+            <div class="slds-media__body">
+                <lightning-record-view-form
+                    record-id={recordId}
+                    object-api-name="Loan__c">
+                    <div class="slds-grid slds-wrap slds-gutters slds-var-p-left_large slds-var-p-right_large">
+                        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                            <lightning-output-field field-name="Business_Licence__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                            <lightning-output-field field-name="Insurance__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                            <lightning-output-field field-name="Cash_Flow_Forecast__c">
+                            </lightning-output-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+                            <lightning-output-field field-name="Financial_Information__c">
+                            </lightning-output-field>
+                        </div>
+                    </div>
+                 </lightning-record-view-form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Related list-->
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="standard:document" size="small" alternative-text="Connected">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"> <b> Documents </b>&nbsp;&nbsp;({recordCount}) </h2>
+                </div>
+                <div class="slds-no-flex"> 
+                    <ul class="slds-button-group-row">
+                        <li class="slds-button-group-item">
+                            <lightning-button label="New" title="Non-primary action" onclick={openModal} class="slds-var-m-left_x-small"></lightning-button>
+                        </li>
+                        <li class="slds-button-group-item">
+                            <lightning-combobox
+                            name="filter"
+                            variant="label-hidden"
+                            value={filterValue}
+                            options={filterOptions}
+                            onchange={filterChange} ></lightning-combobox>
+                        </li>
+                      </ul>
+                  
+                </div>
+            </header>
+        </div>
+ 
+        <div if:true={recordFound} class="slds-media__body">
+                    <lightning-datatable
+                    hide-checkbox-column 
+                    data={data}
+                     columns={columns}
+                    key-field="id"
+                    onrowselection={getSelectedRecords}
+                    onrowaction={handleRowActions}
+                    >
+        </lightning-datatable>
+         </div>
+    </div>
+    <div if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add Document</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-var-p-around_x-large slds-p-top_none" style="overflow-y: auto;" id="modal-content-id-1">
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-top_small">
+                        <c-look-up obj-name="Document_Type__c" icon-name="doctype:overlay" required unique-key='Document Lookup lwc'
+                        label-name="Document Type" create-record=true onvalueselect={selectedDocument}> </c-look-up>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-top_small">
+                        <lightning-input required name="file uploader" class="fileUploader" variant="label-hidden" onchange={handleFilesChange} type="file"></lightning-input>
+                        <div class="slds-text-body_small">{fileName}</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-top_small">
+                        <lightning-input label="Expiry Date"  name="ExpiryDate" onchange={dateChange} type="Date" ></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-top_small">
+                        <lightning-textarea label="Description"  name="Description" onchange={descriptionChange} ></lightning-textarea>
+                    </div>
+                </div>
+
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={handleSave} title="Save">Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <c-new-record-lookup obj-name="Document_Type__c" unique-key='Document Lookup lwc' fields={fields}></c-new-record-lookup>
+</template>

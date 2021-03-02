@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_cannot_edited</fullName>
+    <active>true</active>
+    <description>If the reason is empty, it can be edited</description>
+    <errorConditionFormula>PRIORVALUE(Reason__c)!=&quot;&quot;  &amp;&amp; ISCHANGED(Reason__c)</errorConditionFormula>
+    <errorDisplayField>Reason__c</errorDisplayField>
+    <errorMessage>Reason can&apos;t be changed</errorMessage>
+</ValidationRule>

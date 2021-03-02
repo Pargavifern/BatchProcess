@@ -1,0 +1,92 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure"> 
+                     <lightning-icon icon-name="custom:custom17" alternative-text="Summary" size="small">
+                    </lightning-icon>     
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title"><b> Summary</b>  </h2>
+                </div>
+                <div if:true={mPaymentPresent} class="slds-no-flex"> 
+                    <p class="slds-text-color_error"> Missed Payments : {missedPayment} </p>
+                </div>
+            </header>
+        </div>
+        <div if:true={error}>
+            <p class="slds-p-around_small slds-p-horizontal_small">Error while fetching data</p>
+        </div>
+        <div if:false={error} class="slds-grid slds-wrap slds-gutters alignElements slds-p-around_large slds-p-top_none">
+        <!-- heading -->
+            <div class="slds-col slds-size_1-of-5">
+                    <span class="slds-form-element__label">Number of Payments</span>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                    <span class="slds-form-element__label">Total Paid</span>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                    <span class="slds-form-element__label">Total Principal</span>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                    <span class="slds-form-element__label">Total Interest</span>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                    <span class="slds-form-element__label">Total Fees</span>
+            </div>
+
+        <!-- splited heading and fields like table format -->
+        <!-- fields -->
+            <div class="slds-col slds-size_1-of-5">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">{no_payments}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                <div class="slds-form-element_readonly   slds-p-horizontal_x-small">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={total_paid} format-style="currency">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                <div class="slds-form-element_readonly   slds-p-horizontal_x-small">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={total_principal} format-style="currency">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                <div class="slds-form-element_readonly   slds-p-horizontal_x-small">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={total_interest} format-style="currency">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-5">
+                <div class="slds-form-element_readonly   slds-p-horizontal_x-small">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={total_fee} format-style="currency">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div if:true={loading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </div>
+</template>

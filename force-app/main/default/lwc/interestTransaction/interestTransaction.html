@@ -1,0 +1,40 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div if:true={activeRecord} class="slds-col slds-size_1-of-1">
+                <p class="slds-var-p-horizontal_x-small slds-var-p-bottom_x-small">
+                    This Loan's interest is currently suspended. The suspension will end on {suspenseEndDate}.
+                </p>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Interest Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={_interestBalance}
+                                format-style="currency"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-form-element_readonly  slds-p-horizontal_x-small">
+                    <span class="slds-form-element__label">Principal Balance</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                            <lightning-formatted-number value={_principalBalance}
+                                format-style="currency"></lightning-formatted-number>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input required type="date" label="Transaction Date" min={_lastPaymentDate} value={_transactionDate} onchange={transactionDateChange} >
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input required  label="Charged Interest Amount" value={_interestAmount} disabled={_disabled} ></lightning-input>
+            </div> 
+        </div>   
+    </lightning-card>
+</template>

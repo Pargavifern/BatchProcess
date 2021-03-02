@@ -1,0 +1,16 @@
+<template>
+    <footer class="slds-modal__footer" style="bottom: -43px; position: relative; margin-left:-49px; margin-right:-49px;">
+        
+        <div class="slds-clearfix">
+            <div class="slds-float_left">
+                <lightning-button if:true={showCustomButton1} label={customButton1} onclick={handleCustomButton1} variant="brand" class="slds-float_left"> </lightning-button>
+            </div>
+            <div class="slds-float_right">
+                <lightning-button if:true={showPause} label={pause} onclick={handleGoPause} variant="brand" class="slds-float_left"> </lightning-button>
+                <lightning-button if:true={showPrevious} label={previous} onclick={handleGoPrevious}> </lightning-button>
+                <lightning-button if:true={showNext} label={next} class="slds-m-left_x-small" variant="brand" onclick={handleGoNext}> </lightning-button>
+            </div>
+        </div>
+        
+    </footer>
+</template>

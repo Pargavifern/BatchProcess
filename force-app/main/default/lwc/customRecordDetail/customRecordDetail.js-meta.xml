@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>50.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+        <target>lightning__RecordPage</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="recordId" type="string"/>
+            
+            <property name="objectApiName" type="string"/>
+            
+            <property name="fields" type="string"/>
+            
+            <property name="title" type="string"/>
+            
+            <property name="icon" type="string"/>
+            
+            <property name="column" type="string"/>
+            
+            <property name="mode" type="string"/>
+            
+            <property name="size" type="string"/>
+            
+        </targetConfig>
+        
+        <targetConfig targets="lightning__RecordPage">
+            
+            <property name="fields" type="string"/>
+            
+            <property name="title" type="string"/>
+            
+            <property name="icon" type="string"/>
+            
+            <property name="column" type="string"/>
+            
+            <property name="mode" type="string"/>
+            
+            <property name="size" type="string"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

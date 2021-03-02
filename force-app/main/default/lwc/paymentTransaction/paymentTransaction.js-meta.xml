@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <apiVersion>48.0</apiVersion>
+    
+    <isExposed>true</isExposed>
+    
+    <targets>
+        
+        <target>lightning__FlowScreen</target>
+        
+    </targets>
+    
+    <targetConfigs>
+        
+        <targetConfig targets="lightning__FlowScreen">
+            
+            <property name="principal" type="string"/>
+            
+            <property name="interest" type="string"/>
+            
+            <property name="fee" type="string"/>
+            
+            <property name="principalBalance" type="string"/>
+            
+            <property name="interestBalance" type="string"/>
+            
+            <property name="feeBalance" type="string"/>
+            
+            <property name="totalBalance" type="string"/>
+            
+            <property name="transactionDate" type="DateTime"/>
+            
+            <property name="lastPaymentDate" type="DateTime"/>
+            
+            <property name="todayDate" type="DateTime"/>
+            
+            <property name="InterestFrequency" type="string"/>
+            
+            <property name="PaymentFrequency" type="string"/>
+            
+            <property name="dayCount" type="string"/>
+            
+            <property name="rate" type="string"/>
+            
+            <property name="forScheduled" type="boolean"/>
+            
+            <property name="paymentMethod" type="string"/>
+            
+            <property name="closingBalancePrincipal" type="string"/>
+            
+            <property name="closingBalanceInterest" type="string"/>
+            
+            <property name="closingBalanceFee" type="string"/>
+            
+            <property name="comments" type="string"/>
+            
+            <property name="principalOrder" type="string" role="inputOnly"/>
+            
+            <property name="interstOrder" type="string" role="inputOnly"/>
+            
+            <property name="feeOrder" type="string" role="inputOnly"/>
+            
+            <property name="interestCalculation" type="string" role="inputOnly"/>
+            
+            <property name="total" type="string"/>
+            
+            <property name="suspenseEndDate" label="Suspense End Date" role="inputOnly" type="DateTime"/>
+            
+            <property name="suspendOption" label="Suspend Option" type="string" role="inputOnly"/>
+            
+            <property name="accruedAmount" label="Accrued Amount" type="integer" role="inputOnly"/>
+            
+            <property name="suspenseInterest" label="Suspense Interest" role="outputOnly" type="integer"/>
+            
+            <property name="suspendPresent" label="Suspend Present" role="inputOnly" type="boolean"/>
+            
+        </targetConfig>
+        
+    </targetConfigs>
+    
+</LightningComponentBundle>

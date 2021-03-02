@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>After_pending_status_is_live_only</fullName>
+    <active>true</active>
+    <errorConditionFormula>!ISNEW()  &amp;&amp; ISPICKVAL( PRIORVALUE( Status__c ),&quot;Pending&quot; ) &amp;&amp;  NOT(ISPICKVAL(  Status__c,&quot;Live&quot; ) || ISPICKVAL(  Status__c,&quot;Pending&quot; ))</errorConditionFormula>
+    <errorMessage>Status can be only be changed to &apos;Live&apos;</errorMessage>
+</ValidationRule>

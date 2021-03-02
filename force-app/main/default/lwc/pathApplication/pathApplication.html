@@ -1,0 +1,63 @@
+<template>
+   <c-path-assistant record-id={recordId} object-api-name={objectApiName} picklist-field="Status__c" picklist-label="Status"
+            ongetrecordtypeid={getRecordTypeId} onupdatevalue={updatePicklist} 
+            dependent-field="Completion_Status__c" closed-won="Approved" closed-lost="Canceled" show-button=true></c-path-assistant>
+
+
+<!-- modal pop up-->
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+  aria-describedby="modal-content-id-1" class={modalClass}>
+  <div class="slds-modal__container">
+     <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+           onclick={closeModal}>
+           <lightning-icon icon-name="utility:close" alternative-text="Close Modal" variant="inverse" size="small">
+           </lightning-icon>
+        </button>
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-modal__title slds-hyphenate">
+           Edit Dependencies
+        </h2>
+     </header>
+<div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1" style="overflow: unset;">
+       <div class="slds-grid slds-wrap slds-gutters alignElements">
+           <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+               <lightning-combobox name="combobox-completeStatus" label="Completion Status" placeholder="--None--"
+               required value={selectedCS} options={completionStatus} onchange={handleChange}>
+         </lightning-combobox>
+      </div>
+   </div>
+      <lightning-record-edit-form record-id={recordId} onsubmit ={handleSubmit} object-api-name={objectApiName}>                 
+         <div class="slds-grid slds-wrap slds-gutters slds-var-p-bottom_small">
+            
+      <!-- approved status borrower -->
+      <template if:true={showFields}>
+         <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+         <lightning-input-field required field-name="Approved_Date__c" value={currentDate}></lightning-input-field> </div>
+         <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+         <lightning-input-field required field-name="Approved_Amount__c" value={aAmountDefault}></lightning-input-field></div>
+         </template> 
+        
+<!-- canceled status-->
+      <template if:true={showcancelFields}>
+         <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+            <lightning-input-field required field-name="Cancel_date__c" value={currentDate}></lightning-input-field>
+         </div>
+         <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+            <lightning-input-field required field-name="Cancel_user__c" value={currentUserId}></lightning-input-field>
+         </div>
+         <div class="slds-col slds-size_1-of-2 slds-var-p-top_small">
+            <lightning-input-field required field-name="Cancel_Reason__c"></lightning-input-field>
+         </div>
+      </template> 
+         </div>
+      <div class="slds-modal__footer" style="margin: 0px -15px -15px -15px;">
+          <lightning-button variant="neutral" label="Cancel" onclick={cancelButton}></lightning-button>
+          <lightning-button class="slds-var-m-left_x-small" variant="brand" type="submit" label="Done"></lightning-button>
+      </div>
+  </lightning-record-edit-form>    
+</div>
+   </div>
+  </div>
+</section>
+<div class={modalBackdropClass}></div>
+</template>
